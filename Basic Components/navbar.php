@@ -15,7 +15,7 @@
                                 <a id="Index" class="nav-link text-primary fs-4" href="index.php">Strona główna</a>
                             </li>
                             <li class="nav-item">
-                                <a id="Cars" class="nav-link text-light fs-4" href="#">Oferty</a>
+                                <a id="Cars" class="nav-link text-light fs-4" href="offers.php">Oferty</a>
                             </li>
                             <li class="nav-item">
                                 <a id="Orders" class="nav-link text-light fs-4" href="#">O Nas</a>

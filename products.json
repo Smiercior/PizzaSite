@@ -1,56 +1,101 @@
-{   
-    "pizze":
-    [
-      {
-          "nazwa" : "MARGARITA",
-          "ceny" : 
-          [
-              {
-                  "mała": "18zł"
-              },
-              {
-                  "średnia" : "25zł"
-              },
-              {
-                  "duża" : "30zł"
-              }
-          ],
-          "składniki" : "sos pomidorowy, ser, oregano, pomidor " 
-      },
-      {
-        "nazwa" : "PEPPERONI",
-        "ceny" : 
-        [
-            {
-                "mała": "20zł"
-            },
-            {
-                "średnia" : "27zł"
-            },
-            {
-                "duża" : "35zł"
-            }
-        ],
-        "składniki" : "sos pomidorowy, ser, oregano, pepperoni, papryka " 
-    } 
-    ],
+{
+    "produkty" :
+        {
+            "pizze":
+                    [
+                        {
+                            "nazwa": "MARGARITA",
+                            "ceny": 
+                            {
+                                "mała": "18zł",
+                                "średnia" : "25zł",
+                                "duża" : "30zł"
+                            },
+                            "składniki": "sos pomidorowy, ser, oregano, pomidor " 
+                        },
+                        {
+                            "nazwa": "PEPPERONI",
+                            "ceny": 
+                            {
+                                "mała": "20zł",
+                                "średnia" : "27zł",
+                                "duża" : "35zł"
+                            },
+                            "składniki": "sos pomidorowy, ser, oregano, pepperoni, papryka " 
+                        },
+                        {
+                            "nazwa": "CHICKEN",
+                            "ceny": 
+                            {
+                                "mała": "21zł",
+                                "średnia" : "28zł",
+                                "duża" : "37zł"
+                            },
+                            "składniki": "sos pomidorowy, ser, oregano, kurczak, ananas, kukurydza, cebula " 
+                        }  
 
-    "sałatki":
-    [
+                    ],
+            "sałatki":
+                    [
+                        {
+                            "nazwa": "GRECKA",
+                            "ceny": 
+                            {
+                                "mała": "7zł",
+                                "średnia" : "10zł",
+                                "duża" : "15zł"
+                            },
+                            "składniki": "sałata lodowa, pomidor, ogórek, papryka, cebula, kurczak " 
+                        }  
 
-    ],
+                    ],
 
-    "napoje":
-    [
+            "frytki":
+                    [
+                        {
+                            "nazwa": "FRYTKI Z ZIEMNIAKÓW",
+                            "ceny": 
+                            {
+                                "mała": "5zł",
+                                "średnia" : "7zł",
+                                "duża" : "10zł"
+                            },
+                            "składniki": "" 
+                        },  
+                        {
+                            "nazwa": "FRYTKI Z BATATÓW",
+                            "ceny": 
+                            {
+                                "mała": "7zł",
+                                "średnia" : "9zł",
+                                "duża" : "12zł"
+                            },
+                            "składniki": "" 
+                        }
+                    ],
 
-    ],
-
-    "frytki":
-    [
-
-    ]
-
-
-
-
+            "napoje":
+            [
+                {
+                    "nazwa": "PEPSI",
+                    "ceny": 
+                    {
+                        "mała": "3zł",
+                        "średnia" : "5zł",
+                        "duża" : "9zł"
+                    },
+                    "składniki": "" 
+                },  
+                {
+                    "nazwa": "COLA",
+                    "ceny": 
+                    {
+                        "mała": "3zł",
+                        "średnia" : "5zł",
+                        "duża" : "9zł"
+                    },
+                    "składniki": "" 
+                }
+            ]
+        }
 }
