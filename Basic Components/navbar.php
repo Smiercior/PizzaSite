@@ -12,7 +12,7 @@
                             <img src="Img/logopizz.png" width="75%" height="75%">
                             </li>
                             <li class="nav-item  align-middle">
-                                <a id="Index" class="nav-link text-primary fs-4" href="#">Strona główna</a>
+                                <a id="Index" class="nav-link text-primary fs-4" href="index.php">Strona główna</a>
                             </li>
                             <li class="nav-item">
                                 <a id="Cars" class="nav-link text-light fs-4" href="#">Oferty</a>
@@ -24,11 +24,19 @@
                                 <a id="Contact" class="nav-link text-light fs-4" href="#">Kontakt</a>
                             </li>
                         </ul>
-
+                        <?php if(!isset($_SESSION['username'])) : ?>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a class="text-light fs-4 btn-outline-success btn bg-dark" href="login.php">Zaloguj</a>
-                            <button class="text-light fs-4 btn-outline-success btn bg-dark" href="#">Zarejestruj</button>
+                            <a class="text-light fs-4 btn-outline-success btn bg-dark" href="register.php">Zarejestruj</a>
                         </div>
+                        <?php elseif(isset($_SESSION['username'])) : ?>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a class="text-light fs-4 btn-outline-success btn bg-dark" href="login.php">Moje konto</a>
+                            <form method="GET" accept="index.php">
+                                <input type="submit" class="text-light fs-4 btn-outline-danger btn bg-dark" name="logout" value="Wyloguj">
+                            </form>
+                        </div> 
+                        <?php endif ?>
                     </div>
                 </div>
 

@@ -19,16 +19,40 @@ include('server.php');
 </head>
 
 <body>
-<div class="container-fluid overflow-hidden px-0 bg-black">
-<?php
-include('Basic Components/navbar.php');
-?>
+
+<div class="container-fluid overflow-hidden px-0 bg-black log-container">
+    <?php
+    include('Basic Components/navbar.php');
+    ?>
+
+    <div class="row w-25 mt-4 mx-auto text-center border border-2 border-secondary bg-black ">
+        <div class="col-12">
+            <span class="fs-5 text-light"> Zaloguj się </span>
+        </div>
+        <div class="col-12 mb-2">
+            <span class="fs-6 text-secondary"> Wpisz swój login i hasło </span>
+        </div>
+        <div class="col-12 mb-2">
+            <div class="row">
+                <form method="POST">
+                    <div class="col-12 mb-2">
+                        <input type="text" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="username" placeholder="Nazwa użytkownika">
+                    </div>
+
+                    <div class="col-12 mb-2">
+                        <input type="password" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="password" placeholder="Hasło">
+                    </div>  
+
+                    <div class="col-12">
+                        <input type="submit" name="log" class="btn-outline-success btn bg-dark form-control w-50" value="Zaloguj">
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+
+    </div>
 </div>
-
-<form method="POST" accept="login.php">
-    <input type="submit" name="log" value="Zaloguj"> 
-</form>
-
 
 <?php
 include('Basic Components/footer.php');

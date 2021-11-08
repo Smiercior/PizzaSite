@@ -1,0 +1,56 @@
+{   
+    "pizze":
+    [
+      {
+          "nazwa" : "MARGARITA",
+          "ceny" : 
+          [
+              {
+                  "mała": "18zł"
+              },
+              {
+                  "średnia" : "25zł"
+              },
+              {
+                  "duża" : "30zł"
+              }
+          ],
+          "składniki" : "sos pomidorowy, ser, oregano, pomidor " 
+      },
+      {
+        "nazwa" : "PEPPERONI",
+        "ceny" : 
+        [
+            {
+                "mała": "20zł"
+            },
+            {
+                "średnia" : "27zł"
+            },
+            {
+                "duża" : "35zł"
+            }
+        ],
+        "składniki" : "sos pomidorowy, ser, oregano, pepperoni, papryka " 
+    } 
+    ],
+
+    "sałatki":
+    [
+
+    ],
+
+    "napoje":
+    [
+
+    ],
+
+    "frytki":
+    [
+
+    ]
+
+
+
+
+}
