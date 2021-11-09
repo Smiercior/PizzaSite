@@ -1,9 +1,6 @@
 <?php
 include('server.php');
-if(!isset($_SESSION['username']))
-{
-    //header('location: t.php');
-}
+$_SESSION['site'] = "index";
 ?>
 
 <!DOCTYPE html>

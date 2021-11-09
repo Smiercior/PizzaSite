@@ -1,5 +1,6 @@
 <?php
 include('server.php');
+$_SESSION['site'] = "login";
  ?>
  
 <!DOCTYPE html>
@@ -25,7 +26,7 @@ include('server.php');
     include('Basic Components/navbar.php');
     ?>
 
-    <div class="row w-25 mt-4 mx-auto text-center border border-2 border-secondary bg-black ">
+    <div class="row w-25 mt-4 mb-2 mx-auto text-center border border-2 border-secondary bg-black ">
         <div class="col-12">
             <span class="fs-5 text-light"> Zaloguj się </span>
         </div>

@@ -1,5 +1,6 @@
 <?php
 include('server.php');
+$_SESSION['site'] = "register";
  ?>
  
 <!DOCTYPE html>
@@ -24,9 +25,9 @@ include('server.php');
     include('Basic Components/navbar.php');
     ?>
 
-    <div class="row w-25 mt-4 mx-auto text-center border border-2 border-secondary bg-black ">
+    <div class="row w-25 mt-4 mb-2 mx-auto text-center border border-2 border-secondary bg-black ">
             <div class="col-12">
-                <span class="fs-5 text-light"> Zaloguj się </span>
+                <span class="fs-5 text-light"> Zarejestruj się </span>
             </div>
             <div class="col-12 mb-2">
                 <span class="fs-6 text-secondary"> Wpisz swoje dane do rejestracji </span>

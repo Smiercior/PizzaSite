@@ -12,10 +12,10 @@
                             <img src="Img/logopizz.png" width="75%" height="75%">
                             </li>
                             <li class="nav-item  align-middle">
-                                <a id="Index" class="nav-link text-primary fs-4" href="index.php">Strona główna</a>
+                                <a id="Index" class="nav-link <?php if($_SESSION['site'] == "index"){ echo "text-primary";} else{echo "text-light";}?> fs-4" href="index.php">Strona główna</a>
                             </li>
                             <li class="nav-item">
-                                <a id="Cars" class="nav-link text-light fs-4" href="offers.php">Oferty</a>
+                                <a id="Cars" class="nav-link <?php if($_SESSION['site'] == "offers"){ echo "text-primary";} else{echo "text-light";}?> fs-4" href="offers.php">Oferty</a>
                             </li>
                             <li class="nav-item">
                                 <a id="Orders" class="nav-link text-light fs-4" href="#">O Nas</a>
@@ -29,6 +29,7 @@
                             <a class="text-light fs-4 btn-outline-success btn bg-dark" href="login.php">Zaloguj</a>
                             <a class="text-light fs-4 btn-outline-success btn bg-dark" href="register.php">Zarejestruj</a>
                         </div>
+                        
                         <?php elseif(isset($_SESSION['username'])) : ?>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a class="text-light fs-4 btn-outline-success btn bg-dark" href="login.php">Moje konto</a>

@@ -1,8 +1,18 @@
 <?php
+//// Session ////
 session_start();
+if(!isset($_SESSION['cartProductNumber']))
+{
+     $_SESSION['cartProductNumber'] = 0;
+}
+if(!isset($_SESSION['cartProducts']))
+{
+     $_SESSION['cartProducts'] = " ";
+}
+
+//// Variables ////
 $json = file_get_contents("products.json");
 $products = json_decode($json);
-
 $pizzas = $products->produkty->pizze;
 $salades = $products->produkty->sałatki;
 $chips = $products->produkty->frytki;
@@ -17,8 +27,9 @@ $drinks = $products->produkty->napoje;
 //var_dump($products->produkty->sałatki);
 
 
+//// Routes, Requests ////
 
-
+// Log in 
 if(isset($_POST['log']))
 {
     $_SESSION['username'] = $_POST['username'];
@@ -35,6 +46,7 @@ if(isset($_POST['log']))
     
 }
 
+// Register
 if(isset($_POST['register']))
 {
     $username = $_POST['username'];
@@ -44,13 +56,38 @@ if(isset($_POST['register']))
     header('location: index.php');
 }
 
+// Logout
 if(isset($_GET['logout']))
 {
     session_destroy();
     unset($_SESSION['username']);
     header('location: index.php');
 }
+
+// For order.php, store chosen product name
+if(isset($_POST['productName']))
+{
+     $_SESSION['productName'] = $_POST['productName'];
+}
+
+// Add item to cart
+if(isset($_POST['addToCart']))
+{
+     $_SESSION['cartProductNumber'] = ($_SESSION['cartProductNumber'] + 1);
+     $_SESSION['cartProducts'] = $_SESSION['cartProducts'] . $_SESSION['productName'] . "-" . $_POST['size'] . ",";
+     header('location: offers.php');
+}
+
+// Clear cart
+if(isset($_GET['clearCart']))
+{
+     unset($_SESSION['cartProductNumber']);
+     unset($_SESSION['cartProducts']);
+     header('location: offers.php');
+}    
 ?>
+
+
 
 
 <!--
