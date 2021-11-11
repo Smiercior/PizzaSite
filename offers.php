@@ -50,7 +50,8 @@ $_SESSION['site'] = "offers";
                     </div>
 
                     <div class="col-2 d-flex p-0 justify-content-end">
-                        <button class="ml-2 btn btn-success" onclick="makeOrder('<?= $pizza->nazwa; ?>','pizza')">Zamów teraz</button> 
+                        <?php $priceString = ""; foreach($pizza->ceny as $cena){ $priceString = $priceString . $cena . ","; } ?> 
+                        <button class="ml-2 btn btn-success" onclick="makeOrder('<?= $pizza->nazwa; ?>','<?= $pizza->składniki; ?>','<?= $priceString ?>','pizza','<?= $pizza->zdjęcie; ?>')">Zamów teraz</button> 
                     </div>
                 </div>         
             </div>
@@ -75,7 +76,8 @@ $_SESSION['site'] = "offers";
                     </div>
 
                     <div class="col-2 d-flex p-0 justify-content-end">
-                        <button class="ml-2 btn btn-success" onclick="makeOrder('<?= $salade->nazwa; ?>','salade')">Zamów teraz</button>
+                        <?php $priceString = ""; foreach($salade->ceny as $cena){ $priceString = $priceString . $cena . ","; } ?>  
+                        <button class="ml-2 btn btn-success" onclick="makeOrder('<?= $salade->nazwa; ?>','<?= $salade->składniki; ?>','<?= $priceString; ?>','salade','<?= $salade->zdjęcie; ?>')">Zamów teraz</button>
                     </div>
                 </div>         
             </div>
@@ -101,7 +103,8 @@ $_SESSION['site'] = "offers";
                         </div>
 
                         <div class="col-2 d-flex p-0 justify-content-end">
-                            <button class="ml-2 btn btn-success" onclick="makeOrder('<?= $ch->nazwa; ?>','chips')">Zamów teraz</button>
+                            <?php $priceString = ""; foreach($ch->ceny as $cena){ $priceString = $priceString . $cena . ","; } ?>
+                            <button class="ml-2 btn btn-success" onclick="makeOrder('<?= $ch->nazwa; ?>','<?= $ch->składniki; ?>','<?= $priceString; ?>','chips','<?= $ch->zdjęcie; ?>')">Zamów teraz</button>
                         </div>
                     </div>         
                 </div>
@@ -127,7 +130,8 @@ $_SESSION['site'] = "offers";
                         </div>
 
                         <div class="col-2 d-flex p-0 justify-content-end">
-                            <button class="ml-2 btn btn-success" onclick="makeOrder('<?= $drink->nazwa; ?>','drink')">Zamów teraz</button>
+                            <?php $priceString = ""; foreach($drink->ceny as $cena){ $priceString = $priceString . $cena . ","; } ?>
+                            <button class="ml-2 btn btn-success" onclick="makeOrder('<?= $drink->nazwa; ?>','<?= $drink->składniki; ?>','<?= $priceString; ?>','drink','<?= $drink->zdjęcie; ?>')">Zamów teraz</button>
                         </div>
                     </div>         
                 </div>

@@ -20,3 +20,28 @@ body
 {
     width: 99%;
 }
+#continueLink:hover
+{
+    color: white;
+}
+#continueLink,#orderButton
+{
+    font-size: 100%;
+}
+
+@media (min-width: 751) and (max-width: 900px)
+{
+    #continueLink,#orderButton
+    {
+        font-size: 50%;
+    }
+}
+
+
+@media (max-width: 750px)
+{
+    #continueLink,#orderButton
+    {
+        font-size: 25%;
+    }
+}

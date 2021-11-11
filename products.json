@@ -11,7 +11,8 @@
                                 "średnia" : "25zł",
                                 "duża" : "30zł"
                             },
-                            "składniki": "sos pomidorowy, ser, oregano, pomidor " 
+                            "składniki": "sos pomidorowy, ser, oregano, pomidor " ,
+                            "zdjęcie": "margarita.jpg"
                         },
                         {
                             "nazwa": "PEPPERONI",
@@ -21,7 +22,8 @@
                                 "średnia" : "27zł",
                                 "duża" : "35zł"
                             },
-                            "składniki": "sos pomidorowy, ser, oregano, pepperoni, papryka " 
+                            "składniki": "sos pomidorowy, ser, oregano, pepperoni, papryka ",
+                            "zdjęcie": "pepperoni.jpg"
                         },
                         {
                             "nazwa": "CHICKEN",
@@ -31,7 +33,8 @@
                                 "średnia" : "28zł",
                                 "duża" : "37zł"
                             },
-                            "składniki": "sos pomidorowy, ser, oregano, kurczak, ananas, kukurydza, cebula " 
+                            "składniki": "sos pomidorowy, ser, oregano, kurczak, ananas, kukurydza, cebula ",
+                            "zdjęcie": "chicken.jpg" 
                         }  
 
                     ],
@@ -45,7 +48,8 @@
                                 "średnia" : "10zł",
                                 "duża" : "15zł"
                             },
-                            "składniki": "sałata lodowa, pomidor, ogórek, papryka, cebula, kurczak " 
+                            "składniki": "sałata lodowa, pomidor, ogórek, papryka, cebula, kurczak ",
+                            "zdjęcie": "greekSalade.jpg"  
                         }  
 
                     ],
@@ -60,7 +64,8 @@
                                 "średnia" : "7zł",
                                 "duża" : "10zł"
                             },
-                            "składniki": "" 
+                            "składniki": "",
+                            "zdjęcie": "chips.jpg"  
                         },  
                         {
                             "nazwa": "FRYTKI Z BATATÓW",
@@ -70,7 +75,8 @@
                                 "średnia" : "9zł",
                                 "duża" : "12zł"
                             },
-                            "składniki": "" 
+                            "składniki": "",
+                            "zdjęcie": "sweetPotatosChips.jpg"  
                         }
                     ],
 
@@ -84,7 +90,8 @@
                         "średnia" : "5zł",
                         "duża" : "9zł"
                     },
-                    "składniki": "" 
+                    "składniki": "",
+                    "zdjęcie": "pepsi.jpg"  
                 },  
                 {
                     "nazwa": "COLA",
@@ -94,7 +101,8 @@
                         "średnia" : "5zł",
                         "duża" : "9zł"
                     },
-                    "składniki": "" 
+                    "składniki": "",
+                    "zdjęcie": "cola.jpg"  
                 }
             ]
         }

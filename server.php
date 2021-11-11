@@ -68,6 +68,9 @@ if(isset($_GET['logout']))
 if(isset($_POST['productName']))
 {
      $_SESSION['productName'] = $_POST['productName'];
+     $_SESSION['productComposition'] = $_POST['productComposition'];
+     $_SESSION['productPrice'] = $_POST['productPrice'];
+     $_SESSION['productImg'] = $_POST['productImg'];   
 }
 
 // Add item to cart
