@@ -17,15 +17,7 @@ $pizzas = $products->produkty->pizze;
 $salades = $products->produkty->sałatki;
 $chips = $products->produkty->frytki;
 $drinks = $products->produkty->napoje;
-
-// foreach($pizzas as $pizza)
-// {
-//     echo $pizza->nazwa;
-// }
-
-//var_dump($products->produkty->pizze);
-//var_dump($products->produkty->sałatki);
-
+include('databaseConnection.php');
 
 //// Routes, Requests ////
 
