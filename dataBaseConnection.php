@@ -1,4 +1,7 @@
-<?php //// Database connection, MySQL ////
+<?php
+ //// Database connection, MySQL ////
+
+// Variables
 $serverName = "localhost";
 $userName = "root";
 $password = "";
@@ -21,8 +24,8 @@ if($createDB)
           //echo "DataBase connected";
      }
 
+     // Create database
      $sql = "CREATE DATABASE pizzaDB";
-
      if($connection->query($sql) === true) // Try using query
      {
 
@@ -41,7 +44,7 @@ if($createDB)
 }
 
 // Create tables
-$createTables = true;
+$createTables = false;
 if($createTables)
 {
      // Connect
@@ -62,7 +65,7 @@ if($createTables)
      (
           `id` int(10) NOT NULL AUTO_INCREMENT,
           `username` varchar(40) NOT NULL,
-          `pass` varchar(40) NOT NULL,
+          `pass` varchar(60) NOT NULL,
           `email` varchar(40) NOT NULL,
           PRIMARY KEY (id)
      )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

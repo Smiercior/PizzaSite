@@ -17,6 +17,7 @@ $pizzas = $products->produkty->pizze;
 $salades = $products->produkty->sałatki;
 $chips = $products->produkty->frytki;
 $drinks = $products->produkty->napoje;
+$errors = array();
 include('databaseConnection.php');
 
 //// Routes, Requests ////
@@ -24,28 +25,63 @@ include('databaseConnection.php');
 // Log in 
 if(isset($_POST['log']))
 {
-    $_SESSION['username'] = $_POST['username'];
-    if($_POST['password'] == "milk")
-    {
-        header('location: index.php');
-    }
-    else
-    {
-        session_destroy();
-        unset($_SESSION['username']);
-        header('location: index.php');
-    }
-    
+     $username = mysqli_real_escape_string($connection,$_POST['username']);
+     $password = mysqli_real_escape_string($connection,$_POST['password']);
+     $userExist = "SELECT pass from user where username='$username' limit 1";
+     $result = $connection->query($userExist);
+     $pass = mysqli_fetch_row($result);
+     
+     if(password_verify($password,$pass[0]))
+     {
+          $_SESSION['username'] = $username;
+          unset($result);
+          unset($pass);
+          header('location: index.php');
+     }
+     else
+     {
+          array_push($errors, "Niepoprawny login lub hasło");
+     }  
 }
 
 // Register
 if(isset($_POST['register']))
 {
-    $username = $_POST['username'];
-    $emial = $_POST['emial'];
-    $password = $_POST['password'];
-    $rePassword = $_POST['rePassword'];
-    header('location: index.php');
+     $username = mysqli_real_escape_string($connection,$_POST['username']);
+     $email = mysqli_real_escape_string($connection,$_POST['email']);
+     $password = mysqli_real_escape_string($connection,$_POST['password']);
+     $rePassword = mysqli_real_escape_string($connection,$_POST['rePassword']);
+
+     if(empty($username)) array_push($errors, "Musisz podać nazwę użytkownika");
+     elseif(empty($email)) array_push($errors, "Musisz podać email");
+     elseif(!filter_var($email,FILTER_VALIDATE_EMAIL)) array_push($errors, "Niepoprawny format emaila");
+     elseif(empty($password)) array_push($errors, "Musisz podać hasło");
+     elseif($password != $rePassword) array_push($errors, "Hasła nie są takie samie");
+     else 
+     {
+          $duplicateUsernameCheck = "SELECT * from user where username='$username' limit 1";
+          $duplicateEmailCheck = "SELECT * from user where email='$email' limit 1";
+          $result = $connection->query($duplicateUsernameCheck);
+          $user = mysqli_fetch_row($result);
+          $result = $connection->query($duplicateEmailCheck);
+          $em = mysqli_fetch_row($result);
+          if($user) array_push($errors, "Taki użytkownik już istnieje");
+          elseif($em) array_push($errors, "Taki email już istnieje");
+          else 
+          {
+               $hashPassword = password_hash($password,PASSWORD_BCRYPT); // PASSWORD_BCRYPT - lenght 60
+               $sqlInser = "INSERT INTO user (username,pass,email) VALUES ('$username','$hashPassword','$email')";
+               if($connection->query($sqlInser) === TRUE)
+               {
+                    $_SESSION['success'] = "Udało ci się utworzyć konto";
+                    header('location: index.php'); 
+               }
+               else 
+               {
+                    array_push($errors, "Nie udało się stworzyć konta");
+               }       
+          }     
+     }
 }
 
 // Logout

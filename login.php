@@ -28,11 +28,17 @@ $_SESSION['site'] = "login";
 
     <div class="row w-25 mt-4 mb-2 mx-auto text-center border border-2 border-secondary bg-black ">
         <div class="col-12">
+            <?php include('Basic Components/errors.php') ?>
+        </div>
+
+        <div class="col-12">
             <span class="fs-5 text-light"> Zaloguj się </span>
         </div>
+
         <div class="col-12 mb-2">
             <span class="fs-6 text-secondary"> Wpisz swój login i hasło </span>
         </div>
+        
         <div class="col-12 mb-2">
             <div class="row">
                 <form method="POST">

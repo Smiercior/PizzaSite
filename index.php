@@ -24,6 +24,15 @@ $_SESSION['site'] = "index";
     include('Basic Components/navbar.php');
     ?>
 
+    <?php if(isset($_SESSION['success'])): ?>
+        <div class="row w-100 justify-content-center mt-4 text-light">
+            <div class="col-4 text-center border border-2 border-secondary">
+                <p class="mt-2 mb-2 fs-5"><span class="text-success"><?= $_SESSION['success'] ?></span></p>
+            </div>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif ?>
+
     <?php if(isset($_SESSION['username'])) : ?>
     <div class="row w-100 justify-content-center mt-4 text-light">
         <div class="col-4 text-center border border-2 border-secondary">

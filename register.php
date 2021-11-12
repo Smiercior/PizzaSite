@@ -27,24 +27,30 @@ $_SESSION['site'] = "register";
 
     <div class="row w-25 mt-4 mb-2 mx-auto text-center border border-2 border-secondary bg-black ">
             <div class="col-12">
+                <?php include('Basic Components/errors.php') ?>
+            </div>
+
+            <div class="col-12">
                 <span class="fs-5 text-light"> Zarejestruj się </span>
             </div>
+
             <div class="col-12 mb-2">
                 <span class="fs-6 text-secondary"> Wpisz swoje dane do rejestracji </span>
             </div>
+
             <div class="col-12 mb-2">
                 <div class="row">
                     <form method="POST">
                         <div class="col-12 mb-2">
-                            <input type="text" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="username" placeholder="Nazwa użytkownika">
+                            <input type="text" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="username" maxlength="40" placeholder="Nazwa użytkownika">
                         </div>
 
                         <div class="col-12 mb-2">
-                            <input type="text" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="email" placeholder="Email">
+                            <input type="text" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="email" maxlength="40" placeholder="Email">
                         </div>
 
                         <div class="col-12 mb-2">
-                            <input type="password" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="password" placeholder="Hasło">
+                            <input type="password" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="password" maxlength="40" placeholder="Hasło">
                         </div>  
 
                         <div class="col-12 mb-2">
