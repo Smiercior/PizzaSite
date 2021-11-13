@@ -25,6 +25,10 @@ $_SESSION['site'] = "order";
      ?>
 
     <div class="row w-25 mt-4 mb-4 border mx-auto">
+        <div class="col-12 text-center">
+            <?php include('Basic Components/errors.php') ?>
+        </div>
+
         <div class="p-2 col-12 text-start ml-2 bg-dark border">
             <span class="text-light fs-4">Twoje zamówienia</span>
         </div>

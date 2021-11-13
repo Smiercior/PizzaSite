@@ -73,7 +73,7 @@ if(isset($_POST['register']))
      elseif(empty($email)) array_push($errors, "Musisz podać email");
      elseif(!filter_var($email,FILTER_VALIDATE_EMAIL)) array_push($errors, "Niepoprawny format emaila");
      elseif(empty($password)) array_push($errors, "Musisz podać hasło");
-     elseif($password != $rePassword) array_push($errors, "Hasła nie są takie samie");
+     elseif($password != $rePassword) array_push($errors, "Hasła nie są takie same");
      else 
      {
           // Check if username or email already exist
@@ -153,6 +153,55 @@ if(isset($_POST['changeProfile']))
           //var_dump($connection->error);
           array_push($errors, "Nie udało się zmienić danych");
      }     
+}
+
+// Make order to DB
+if(isset($_POST['makeOrder']))
+{
+     // Check if user is logged in
+     if(isset($_SESSION['username'])) // User logged in
+     {
+
+     }
+     else // User isn't logged in
+     {
+          $email = $_POST['email'];
+          $deliveryType = $_POST['delivery'];
+          if($deliveryType == "self") // Delivery self - only email
+          {
+               if($email == "" ) array_push($errors, "Musisz podać adres email");
+               $sqlInsert = "INSERT INTO ord (type,price,products,email) VALUES ('$deliveryType',10.0,'milk','$email')";
+          }
+          elseif($deliveryType == "courier") // Delivery by courier - email, city, street, houseNumber
+          {
+               $city = $_POST['city'];
+               $street = $_POST['street'];
+               $houseNumber = $_POST['houseNumber'];
+
+               if($email == "" ) array_push($errors, "Musisz podać adres email");
+               elseif($city == "" ) array_push($errors, "Musisz podać miasto");
+               elseif($street == "" ) array_push($errors, "Musisz podać ulicę");
+               elseif($houseNumber == "" ) array_push($errors, "Musisz podać numer domu");     
+               $sqlInsert = "INSERT INTO ord (type,price,products,email,city,street,houseNumber) VALUES ('$deliveryType',10.0,'milk','$email','$city','$street','$houseNumber')";
+          }
+
+          if(count($errors) == 0) // If data is correct
+          {
+               if($connection->query($sqlInsert) === TRUE) 
+               {
+                    $_SESSION['success'] = "Zamówienie zostało złożone";
+                    unset($_SESSION['cartProductNumber']);
+                    unset($_SESSION['cartProducts']);
+                    header('location: offers.php'); 
+               }
+               else 
+               {
+                    $_SESSION['error'] = "Nie udało się złożyć zamówienia";
+                    header('location: offers.php');
+               } 
+          }
+          
+     }
 }
 
 

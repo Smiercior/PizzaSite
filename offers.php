@@ -23,6 +23,24 @@ $_SESSION['site'] = "offers";
     <?php
     include('Basic Components/navbar.php');
      ?>
+
+    <?php if(isset($_SESSION['success'])): ?>
+        <div class="row w-100 justify-content-center mt-4 text-light">
+            <div class="col-4 text-center border border-2 border-secondary">
+                <p class="mt-2 mb-2 fs-5"><span class="text-success"><?= $_SESSION['success'] ?></span></p>
+            </div>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif ?>
+
+    <?php if(isset($_SESSION['error'])): ?>
+        <div class="row w-100 justify-content-center mt-4 text-light">
+            <div class="col-4 text-center border border-2 border-secondary">
+                <p class="mt-2 mb-2 fs-5"><span class="text-danger"><?= $_SESSION['error'] ?></span></p>
+            </div>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif ?>
      
      <div class="row mt-4 mb-2 w-75 mx-auto text-start border border-2 border-secondary bg-black ">
         <div class="col-12 text-center">

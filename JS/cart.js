@@ -28,13 +28,13 @@ if(dataString != "")
 {
     email = `<input type="email" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="email" placeholder="Email" value=${emailString}>`;
     city = `<input type="text" class="btn-outline-primary btn bg-dark form-control w-75 text-light mt-1" name="city" placeholder="Miasto" value=${cityString}>`
-    street = `<input type="text" class="btn-outline-primary btn bg-dark form-control w-50 text-light mt-1" name="street" placeholder="Ulica" value=${streetString}> <input type="text" class="btn-outline-primary btn bg-dark form-control w-25 text-light mt-1" name="houseNr" placeholder="Nr.dom" value=${houseNumberString}>`
+    street = `<input type="text" class="btn-outline-primary btn bg-dark form-control w-50 text-light mt-1" name="street" placeholder="Ulica" value=${streetString}> <input type="text" class="btn-outline-primary btn bg-dark form-control w-25 text-light mt-1" name="houseNumber" placeholder="Nr.dom" value=${houseNumberString}>`
 } 
 else
 {
     email = `<input type="email" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="email" placeholder="Email">`;
     city = '<input type="text" class="btn-outline-primary btn bg-dark form-control w-75 text-light mt-1" name="city" placeholder="Miasto">'
-    street = '<input type="text" class="btn-outline-primary btn bg-dark form-control w-50 text-light mt-1" name="street" placeholder="Ulica"> <input type="text" class="btn-outline-primary btn bg-dark form-control w-25 text-light mt-1" name="houseNr" placeholder="Nr.dom">'
+    street = '<input type="text" class="btn-outline-primary btn bg-dark form-control w-50 text-light mt-1" name="street" placeholder="Ulica"> <input type="text" class="btn-outline-primary btn bg-dark form-control w-25 text-light mt-1" name="houseNumber" placeholder="Nr.dom">'
 } 
 
 // User choose delivery : self

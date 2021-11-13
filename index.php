@@ -89,7 +89,7 @@ $_SESSION['site'] = "index";
             <p class="mt-2 mb-2 fs-4 text-primary">Jedynie świeże składniki, zamawiane lokalnie</p>
             <p class="text-light">Dbamy w naszej kuchni by składniki były jak najwyższej jakości. Każdą pizze traktujemy wyjątkowo i staramy
                 się serwować jak najdoskonalszy smak. Nasza obsługa jest wykwalifikowana i silnie pracuje by zadowolić każdego kilenta </p>
-            <button type="button" class="btn btn-success mb-2">Zamów online!</button>
+            <a href="offers.php" type="button" class="btn btn-success mb-2">Zamów online!</a>
         </div>
     </div>
 
