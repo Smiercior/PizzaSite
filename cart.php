@@ -61,11 +61,24 @@ $_SESSION['site'] = "order";
                 </div>
             </div>
 
+            <div id="dataForJS" hidden>
+                <?php if(isset($_SESSION['username'])): ?>
+                    {
+                    email="<?= $_SESSION['email']; ?>";
+                    city="<?= $_SESSION['city']; ?>";
+                    street="<?= $_SESSION['street']; ?>";
+                    houseNumber="<?= $_SESSION['houseNumber']; ?>";
+                    }
+                <?php else: ?>
+                    ""
+                <?php endif; ?>
+            </div>
 
-            <div class="col-12 mt-3">
+            <div class="col-12 mt-3">         
                 <div id="formInputs" class="text-center">
-                    <input type="email" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="email" placeholder="Email">
+                    <input type="email" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="email" placeholder="Email" <?php if(isset($_SESSION['username'])): ?> value="<?= $_SESSION['email']; ?>" <?php endif ?>>
                 </div>
+            
             </div>
 
             <div class="p-2 col-12 text-start ml-2 bg-dark border mt-2">

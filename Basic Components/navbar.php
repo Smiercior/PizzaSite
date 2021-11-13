@@ -32,7 +32,7 @@
                         
                         <?php elseif(isset($_SESSION['username'])) : ?>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a class="text-light fs-4 btn-outline-success btn bg-dark" href="login.php">Moje konto</a>
+                            <a class="text-light fs-4 btn-outline-success btn bg-dark" href="account.php">Moje konto</a>
                             <form method="GET" accept="index.php">
                                 <input type="submit" class="text-light fs-4 btn-outline-danger btn bg-dark" name="logout" value="Wyloguj">
                             </form>

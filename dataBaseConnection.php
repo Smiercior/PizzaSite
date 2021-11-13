@@ -6,9 +6,10 @@ $serverName = "localhost";
 $userName = "root";
 $password = "";
 $dbName = "pizzaDB";
+$ini = parse_ini_file("app.ini");
 
 // Create database
-$createDB = false;
+$createDB = $ini['createDatabase'];
 if($createDB)
 {
      // Connect
@@ -44,7 +45,7 @@ if($createDB)
 }
 
 // Create tables
-$createTables = false;
+$createTables = $ini['createTables'];
 if($createTables)
 {
      // Connect
@@ -60,13 +61,17 @@ if($createTables)
           //echo "DataBase connected";
      }
 
-     // Create tables
+     // Create table user
      $sql = "CREATE TABLE User
      (
           `id` int(10) NOT NULL AUTO_INCREMENT,
           `username` varchar(40) NOT NULL,
           `pass` varchar(60) NOT NULL,
           `email` varchar(40) NOT NULL,
+          `city` varchar(40) NULL,
+          `street` varchar(40) NULL,
+          `houseNumber` varchar(40) NULL,
+          `role` varchar(4) NOT NULL,
           PRIMARY KEY (id)
      )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
      ";
@@ -84,7 +89,36 @@ if($createTables)
           {
                echo "Error creating new table " . $connection->error; 
           }
-     }  
+     } 
+     
+     // // Create table order
+     // $sql = "CREATE TABLE User
+     // (
+     //      `id` int(10) NOT NULL AUTO_INCREMENT,
+     //      `username` varchar(40) NOT NULL,
+     //      `pass` varchar(60) NOT NULL,
+     //      `email` varchar(40) NOT NULL,
+     //      `city` varchar(40) NULL,
+     //      `street` varchar(40) NULL,
+     //      `houseNumber` varchar(40) NULL,
+     //      PRIMARY KEY (id)
+     // )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+     // ";
+     // if($connection->query($sql) === true) // Try using query
+     // {
+
+     // }
+     // else // If some error occured
+     // {
+     //      if(strpos($connection->error, "already exists") != false) // If table already exists
+     //      {
+
+     //      }
+     //      else // Different error occured
+     //      {
+     //           echo "Error creating new table " . $connection->error; 
+     //      }
+     // } 
 }
 
 // Connect to database
