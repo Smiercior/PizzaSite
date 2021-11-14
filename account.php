@@ -1,6 +1,7 @@
 <?php
 include('server.php');
 $_SESSION['site'] = "login";
+if(!isset($_SESSION['username'])) header('location: login.php');
  ?>
  
 <!DOCTYPE html>
@@ -67,6 +68,29 @@ $_SESSION['site'] = "login";
                         <input type="submit" name="changeProfile" class="btn-outline-success btn bg-dark form-control w-50" value="Zapisz dane">
                     </div>
                 </form>
+            </div>
+      
+        </div>
+    </div>
+
+    <div class="row w-25 mt-4 mb-2 mx-auto text-center border border-2 border-secondary bg-black ">
+        <div class="col-12">
+            <span class="fs-5 text-warning"> Ustawienia konta</span>
+        </div>
+
+        <div class="col-12 mb-2">
+            <span class="fs-6 text-secondary"> Uwaga zmian nie można cofnąć! </span>
+        </div>
+        
+        <div class="col-12 mb-2">
+            <div class="row">
+                <div class="col-12 mb-2">
+                    <a href="accountEmail.php" class="btn-outline-success btn bg-dark form-control w-50">Zmień email</a>
+                </div>
+
+                <div class="col-12">
+                    <a href="accountDel.php" class="btn-outline-danger btn bg-dark form-control w-50">Usuń konto</a>
+                </div>
             </div>
             
         </div>

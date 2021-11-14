@@ -165,24 +165,6 @@ if(isset($_GET['clearCart']))
      header('location: offers.php');
 } 
 
-// Change profile data
-if(isset($_POST['changeProfile']))
-{
-     $sqlUpdate = "UPDATE user SET city='{$_POST['city']}', street='{$_POST['street']}', houseNumber='{$_POST['houseNumber']}' where username='{$_SESSION['username']}'";
-     if($connection->query($sqlUpdate) === TRUE)
-     {
-          $_SESSION['success'] = "Dane zostały zapisane";
-          $_SESSION['city'] = $_POST['city'];
-          $_SESSION['street'] = $_POST['street'];
-          $_SESSION['houseNumber'] = $_POST['houseNumber'];
-     }
-     else 
-     {
-          //var_dump($connection->error);
-          array_push($errors, "Nie udało się zmienić danych");
-     }     
-}
-
 // Make order to DB
 if(isset($_POST['makeOrder']))
 {
@@ -255,6 +237,58 @@ if(isset($_POST['makeOrder']))
           
           
      }
+}
+
+// Change profile data
+if(isset($_POST['changeProfile']))
+{
+     $sqlUpdate = "UPDATE user SET city='{$_POST['city']}', street='{$_POST['street']}', houseNumber='{$_POST['houseNumber']}' where username='{$_SESSION['username']}'";
+     if($connection->query($sqlUpdate) === TRUE)
+     {
+          $_SESSION['success'] = "Dane zostały zapisane";
+          $_SESSION['city'] = $_POST['city'];
+          $_SESSION['street'] = $_POST['street'];
+          $_SESSION['houseNumber'] = $_POST['houseNumber'];
+     }
+     else 
+     {
+          //var_dump($connection->error);
+          array_push($errors, "Nie udało się zmienić danych");
+     }     
+}
+
+if(isset($_POST['changeEmail']))
+{
+     $sqlUpdate = "UPDATE user SET email='{$_POST['email']}' where username='{$_SESSION['username']}'";
+     if($connection->query($sqlUpdate) === TRUE)
+     {
+          $_SESSION['success'] = "Email został zmieniony";
+          $_SESSION['email'] = $_POST['email'];
+          header('location: account.php');
+     }
+     else 
+     {
+          //var_dump($connection->error);
+          array_push($errors, "Nie udało się zmienić emaila");
+          header('location: account.php');
+     }     
+}
+
+if(isset($_POST['deleteAccount']))
+{
+     $sqlDel = "DELETE from user where username='{$_SESSION['username']}'";
+     if($connection->query($sqlDel) === TRUE) 
+     {
+          session_destroy();
+          session_start();
+          $_SESSION['success'] = "Konto zostało pomyślnie usunięte";
+          header('location: index.php'); 
+     }
+     else 
+     {
+          $_SESSION['error'] = "Nie udało się usunąc konta";
+          header('location: index.php'); 
+     }     
 }
 
 

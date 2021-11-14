@@ -33,6 +33,15 @@ $_SESSION['site'] = "index";
         <?php unset($_SESSION['success']); ?>
     <?php endif ?>
 
+    <?php if(isset($_SESSION['error'])): ?>
+        <div class="row w-100 justify-content-center mt-4 text-light">
+            <div class="col-4 text-center border border-2 border-secondary">
+                <p class="mt-2 mb-2 fs-5"><span class="text-danger"><?= $_SESSION['error'] ?></span></p>
+            </div>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif ?>
+
     <?php if(isset($_SESSION['username'])) : ?>
     <div class="row w-100 justify-content-center mt-4 text-light">
         <div class="col-4 text-center border border-2 border-secondary">
