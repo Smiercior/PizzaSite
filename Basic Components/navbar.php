@@ -18,10 +18,10 @@
                                 <a id="Cars" class="nav-link <?php if($_SESSION['site'] == "offers"){ echo "text-primary";} else{echo "text-light";}?> fs-4" href="offers.php">Oferty</a>
                             </li>
                             <li class="nav-item">
-                                <a id="Orders" class="nav-link text-light fs-4" href="#">O Nas</a>
+                                <a id="Orders" class="nav-link <?php if($_SESSION['site'] == "about"){ echo "text-primary";} else{echo "text-light";}?> fs-4" href="about.php">O Nas</a>
                             </li>
                             <li class="nav-item">
-                                <a id="Contact" class="nav-link text-light fs-4" href="#">Kontakt</a>
+                                <a id="Contact" class="nav-link <?php if($_SESSION['site'] == "contact"){ echo "text-primary";} else{echo "text-light";}?> fs-4" href="contact.php">Kontakt</a>
                             </li>
                         </ul>
                         <?php if(!isset($_SESSION['username'])) : ?>

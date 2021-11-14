@@ -39,13 +39,14 @@ if(isset($_POST['log']))
      {
           // Set session variables
           $_SESSION['username'] = $username;
-          $userData = "SELECT email,city,street,houseNumber from user where username='$username' limit 1";
+          $userData = "SELECT id,email,city,street,houseNumber from user where username='$username' limit 1";
           $result = $connection->query($userData);
           $data = mysqli_fetch_row($result);
-          $_SESSION['email'] = $data[0];
-          $_SESSION['city'] = $data[1];
-          $_SESSION['street'] = $data[2];
-          $_SESSION['houseNumber'] = $data[3];
+          $_SESSION['userId'] = $data[0];
+          $_SESSION['email'] = $data[1];
+          $_SESSION['city'] = $data[2];
+          $_SESSION['street'] = $data[3];
+          $_SESSION['houseNumber'] = $data[4];
 
           unset($result);
           unset($pass);
@@ -129,6 +130,33 @@ if(isset($_POST['addToCart']))
      header('location: offers.php');
 }
 
+// Remove item from cart
+if(isset($_POST['removeFromCart']))
+{
+     // Get data
+     $delProduct = $_POST['delProduct'];
+     $productsArray = explode(",",$_SESSION['cartProducts']);
+     $newCartProducts = "";
+
+     // Delete certain product from cart and save other products to temp string
+     foreach($productsArray as $product)
+     {
+          if($product != $delProduct)
+          {
+               $newCartProducts = $newCartProducts . $product . ",";
+          }
+          else // Decrease product numbers in cart
+          {
+               $_SESSION['cartProductNumber'] -= 1;
+          } 
+     }
+
+     // Save all products from old cart to new cart without delProduct
+     $newCartProducts = substr($newCartProducts,0,-1); // Remove additional ','
+     $_SESSION['cartProducts'] = $newCartProducts;
+     header('location: cart.php');     
+}
+
 // Clear cart
 if(isset($_GET['clearCart']))
 {
@@ -158,6 +186,65 @@ if(isset($_POST['changeProfile']))
 // Make order to DB
 if(isset($_POST['makeOrder']))
 {
+     $email = $_POST['email'];
+     $deliveryType = $_POST['delivery'];
+     $price = $_POST['price'];
+
+     if($deliveryType == "self") // Delivery self - only email
+     {
+          if($price == 0.0 ) array_push($errors, "Musisz mieć chociaż jeden produkt w koszyku");
+          elseif($email == "" ) array_push($errors, "Musisz podać adres email");
+          if(isset($_SESSION['username'])) // User logged in
+          {
+               $sqlInsert = "INSERT INTO ord (userId,type,price,products,email) VALUES ('{$_SESSION['userId']}','$deliveryType',$price,'{$_SESSION['cartProducts']}','$email')";    
+          }
+          else // User isn't logged in
+          {
+               $sqlInsert = "INSERT INTO ord (type,price,products,email) VALUES ('$deliveryType',$price,'{$_SESSION['cartProducts']}','$email')";    
+          }
+          
+     }
+     elseif($deliveryType == "courier") // Delivery by courier - email, city, street, houseNumber
+     {
+          $city = $_POST['city'];
+          $street = $_POST['street'];
+          $houseNumber = $_POST['houseNumber'];
+
+          if($price == 0.0 ) array_push($errors, "Musisz mieć chociaż jeden produkt w koszyku");
+          elseif($email == "" ) array_push($errors, "Musisz podać adres email");
+          elseif($city == "" ) array_push($errors, "Musisz podać miasto");
+          elseif($street == "" ) array_push($errors, "Musisz podać ulicę");
+          elseif($houseNumber == "" ) array_push($errors, "Musisz podać numer domu"); 
+          if(isset($_SESSION['username'])) // User logged in
+          {
+               $sqlInsert = "INSERT INTO ord (userId,type,price,products,email,city,street,houseNumber) VALUES ('{$_SESSION['userId']}','$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','$city','$street','$houseNumber')";
+          }
+          else // User isn't logged in
+          {
+               $sqlInsert = "INSERT INTO ord (type,price,products,email,city,street,houseNumber) VALUES ('$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','$city','$street','$houseNumber')";
+          }    
+          
+     }
+
+     if(count($errors) == 0) // If data is correct
+     {
+          if($connection->query($sqlInsert) === TRUE) 
+          {
+               $_SESSION['success'] = "Zamówienie zostało złożone";
+               unset($_SESSION['cartProductNumber']);
+               unset($_SESSION['cartProducts']);
+               header('location: offers.php'); 
+          }
+          else 
+          {
+               $_SESSION['error'] = "Nie udało się złożyć zamówienia";
+               header('location: offers.php');
+          } 
+     }
+
+
+
+
      // Check if user is logged in
      if(isset($_SESSION['username'])) // User logged in
      {
@@ -165,41 +252,7 @@ if(isset($_POST['makeOrder']))
      }
      else // User isn't logged in
      {
-          $email = $_POST['email'];
-          $deliveryType = $_POST['delivery'];
-          if($deliveryType == "self") // Delivery self - only email
-          {
-               if($email == "" ) array_push($errors, "Musisz podać adres email");
-               $sqlInsert = "INSERT INTO ord (type,price,products,email) VALUES ('$deliveryType',10.0,'milk','$email')";
-          }
-          elseif($deliveryType == "courier") // Delivery by courier - email, city, street, houseNumber
-          {
-               $city = $_POST['city'];
-               $street = $_POST['street'];
-               $houseNumber = $_POST['houseNumber'];
-
-               if($email == "" ) array_push($errors, "Musisz podać adres email");
-               elseif($city == "" ) array_push($errors, "Musisz podać miasto");
-               elseif($street == "" ) array_push($errors, "Musisz podać ulicę");
-               elseif($houseNumber == "" ) array_push($errors, "Musisz podać numer domu");     
-               $sqlInsert = "INSERT INTO ord (type,price,products,email,city,street,houseNumber) VALUES ('$deliveryType',10.0,'milk','$email','$city','$street','$houseNumber')";
-          }
-
-          if(count($errors) == 0) // If data is correct
-          {
-               if($connection->query($sqlInsert) === TRUE) 
-               {
-                    $_SESSION['success'] = "Zamówienie zostało złożone";
-                    unset($_SESSION['cartProductNumber']);
-                    unset($_SESSION['cartProducts']);
-                    header('location: offers.php'); 
-               }
-               else 
-               {
-                    $_SESSION['error'] = "Nie udało się złożyć zamówienia";
-                    header('location: offers.php');
-               } 
-          }
+          
           
      }
 }

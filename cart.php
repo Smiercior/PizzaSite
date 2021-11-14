@@ -1,6 +1,22 @@
 <?php
+// Get variables
 include("server.php");
 $_SESSION['site'] = "order";
+
+// Count products price
+$sum = 0.0;
+if($_SESSION['cartProducts'] != " ")
+{
+    $productsArray = explode(",",$_SESSION['cartProducts']);
+    foreach($productsArray as $product)
+    {
+        if($product != "")
+        {
+            $productData = explode("-",$product);
+            $sum = $sum +  floatval($productData[2]);
+        }   
+    }
+}      
  ?>
 <!DOCTYPE html>
 <html>
@@ -37,7 +53,19 @@ $_SESSION['site'] = "order";
             <?php if($_SESSION['cartProducts'] != " "): ?>
                 <?php $productsArray = explode(",",$_SESSION['cartProducts']) ?>
                 <?php foreach($productsArray as $product): ?>
-                    <div class="col-12 text-primary fs-5"><?= $product ?></div>
+                    <?php if($product != ""): ?>
+                        <div class="col-12 mb-1">
+                            <div class="row">
+                                <div class="col-8 text-primary fs-5"><?= $product ?></div>
+                                <div class="col-4">
+                                    <form method="POST">
+                                        <input name="delProduct" value="<?= $product ?>" hidden>
+                                        <input type="submit" class="btn-outline-danger btn" name="removeFromCart" value="X">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                 <?php endforeach ?>
                 
             <?php else: ?>
@@ -86,22 +114,7 @@ $_SESSION['site'] = "order";
             </div>
 
             <div class="p-2 col-12 text-start ml-2 bg-dark border mt-2">
-                <?php
-                    $sum = 0.0;
-                    if($_SESSION['cartProducts'] != " ")
-                    {
-                        $productsArray = explode(",",$_SESSION['cartProducts']);
-                        foreach($productsArray as $product)
-                        {
-                            if($product != "")
-                            {
-                                $productData = explode("-",$product);
-                                $sum = $sum +  floatval($productData[2]);
-                            }   
-                        }
-                    }        
-                 ?>
-
+                <input name="price" value="<?= $sum ?>" hidden>
                 <span class="text-light fs-4">Kwota: <span class="text-warning"><?= $sum ?>zł</span></span>
             </div>
 
