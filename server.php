@@ -39,7 +39,7 @@ if(isset($_POST['log']))
      {
           // Set session variables
           $_SESSION['username'] = $username;
-          $userData = "SELECT id,email,city,street,houseNumber from user where username='$username' limit 1";
+          $userData = "SELECT id,email,city,street,houseNumber,role from user where username='$username' limit 1";
           $result = $connection->query($userData);
           $data = mysqli_fetch_row($result);
           $_SESSION['userId'] = $data[0];
@@ -47,6 +47,7 @@ if(isset($_POST['log']))
           $_SESSION['city'] = $data[2];
           $_SESSION['street'] = $data[3];
           $_SESSION['houseNumber'] = $data[4];
+          $_SESSION['role'] = $data[5];
 
           unset($result);
           unset($pass);
@@ -165,6 +166,27 @@ if(isset($_GET['clearCart']))
      header('location: offers.php');
 } 
 
+// Get user orders and show then on the site
+function getUserOrders($connection)
+{
+     if($_SESSION['role'] == "user")
+     {
+          $sqlGetOrders = "SELECT o.id,o.products,o.price,o.type,o.email,o.city,o.street,o.houseNumber,o.status from ord o join user u on u.id = o.userId where username='{$_SESSION['username']}'";
+     }
+     elseif($_SESSION['role'] == "sell")
+     {
+          $sqlGetOrders = "SELECT o.id,o.products,o.price,o.type,o.email,o.city,o.street,o.houseNumber,o.status,u.username from ord o join user u on u.id = o.userId";
+     }
+     
+     $result = $connection->query($sqlGetOrders);
+     $data = mysqli_fetch_all($result);
+     $_SESSION['orders'] = $data;
+}
+if(isset($_POST['getUserOrders']))
+{
+     header('location: myOrders.php'); 
+}
+
 // Make order to DB
 if(isset($_POST['makeOrder']))
 {
@@ -178,11 +200,11 @@ if(isset($_POST['makeOrder']))
           elseif($email == "" ) array_push($errors, "Musisz podać adres email");
           if(isset($_SESSION['username'])) // User logged in
           {
-               $sqlInsert = "INSERT INTO ord (userId,type,price,products,email) VALUES ('{$_SESSION['userId']}','$deliveryType',$price,'{$_SESSION['cartProducts']}','$email')";    
+               $sqlInsert = "INSERT INTO ord (userId,type,price,products,email,status) VALUES ('{$_SESSION['userId']}','$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','Nie zaakceptowany')";    
           }
           else // User isn't logged in
           {
-               $sqlInsert = "INSERT INTO ord (type,price,products,email) VALUES ('$deliveryType',$price,'{$_SESSION['cartProducts']}','$email')";    
+               $sqlInsert = "INSERT INTO ord (type,price,products,email,status) VALUES ('$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','Nie zaakceptowany')";    
           }
           
      }
@@ -199,11 +221,11 @@ if(isset($_POST['makeOrder']))
           elseif($houseNumber == "" ) array_push($errors, "Musisz podać numer domu"); 
           if(isset($_SESSION['username'])) // User logged in
           {
-               $sqlInsert = "INSERT INTO ord (userId,type,price,products,email,city,street,houseNumber) VALUES ('{$_SESSION['userId']}','$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','$city','$street','$houseNumber')";
+               $sqlInsert = "INSERT INTO ord (userId,type,price,products,email,city,street,houseNumber,status) VALUES ('{$_SESSION['userId']}','$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','$city','$street','$houseNumber','Nie zaakceptowany')";
           }
           else // User isn't logged in
           {
-               $sqlInsert = "INSERT INTO ord (type,price,products,email,city,street,houseNumber) VALUES ('$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','$city','$street','$houseNumber')";
+               $sqlInsert = "INSERT INTO ord (type,price,products,email,city,street,houseNumber,status) VALUES ('$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','$city','$street','$houseNumber','Nie zaakceptowany')";
           }    
           
      }
@@ -239,6 +261,20 @@ if(isset($_POST['makeOrder']))
      }
 }
 
+// Change order status - only role 'sell'
+if(isset($_POST['changeOrderStatus']))
+{
+     $sqlChangeOrderStatus = "UPDATE ord SET status='{$_POST['status']}' where id='{$_POST['orderId']}'";
+     if($connection->query($sqlChangeOrderStatus) === TRUE) 
+     {
+          $_SESSION['success'] = "Status zamówienia '" . $_POST['orderId'] . "' zmieniony";
+     }
+     else 
+     {
+          $_SESSION['error'] = "Nie udało się zmienić statusu zamówienia '" . $_POST['orderId'] . "'";
+     }    
+}
+
 // Change profile data
 if(isset($_POST['changeProfile']))
 {
@@ -257,6 +293,7 @@ if(isset($_POST['changeProfile']))
      }     
 }
 
+// Change user email
 if(isset($_POST['changeEmail']))
 {
      $sqlUpdate = "UPDATE user SET email='{$_POST['email']}' where username='{$_SESSION['username']}'";
@@ -274,6 +311,7 @@ if(isset($_POST['changeEmail']))
      }     
 }
 
+// Delete user account
 if(isset($_POST['deleteAccount']))
 {
      $sqlDel = "DELETE from user where username='{$_SESSION['username']}'";

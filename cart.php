@@ -46,7 +46,7 @@ if($_SESSION['cartProducts'] != " ")
         </div>
 
         <div class="p-2 col-12 text-start ml-2 bg-dark border">
-            <span class="text-light fs-4">Twoje zamówienia</span>
+            <span class="text-light fs-4">Twoje produkty</span>
         </div>
 
         <div class="col-12 text-center text-warning mt-1">

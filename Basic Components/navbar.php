@@ -7,7 +7,7 @@
                     </button>
 
                     <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto align-items-center w-75">
+                        <ul class="navbar-nav mr-auto align-items-center w-100">
                             <li class="nav-item logo">
                             <img src="Img/logopizz.png" width="75%" height="75%">
                             </li>
@@ -25,16 +25,27 @@
                             </li>
                         </ul>
                         <?php if(!isset($_SESSION['username'])) : ?>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <div class="d-grid gap-2 d-flex justify-content-end w-100">
                             <a class="text-light fs-4 btn-outline-success btn bg-dark" href="login.php">Zaloguj</a>
                             <a class="text-light fs-4 btn-outline-success btn bg-dark" href="register.php">Zarejestruj</a>
                         </div>
                         
                         <?php elseif(isset($_SESSION['username'])) : ?>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a class="text-light fs-4 btn-outline-success btn bg-dark" href="account.php">Moje konto</a>
+                        <div class="d-grid gap-2 d-flex justify-content-end w-100">
+                            <?php if($_SESSION['role'] == "sell"): ?>
+                                <form method="POST">
+                                    <input type="submit" class="text-light fs-5 btn-outline-warning btn bg-dark" name="getUserOrders" value="Wszystkie zamówienia">
+                                </form>
+                            <?php elseif($_SESSION['role'] == "user"): ?>
+                                <form method="POST">
+                                    <input type="submit" class="text-light fs-5 btn-outline-warning btn bg-dark" name="getUserOrders" value="Moje zamówienia">
+                                </form>
+                            <?php endif ?>
+
+                            <a class="text-light fs-5 btn-outline-success btn bg-dark" href="account.php">Moje konto</a>
+                            
                             <form method="GET" accept="index.php">
-                                <input type="submit" class="text-light fs-4 btn-outline-danger btn bg-dark" name="logout" value="Wyloguj">
+                                <input type="submit" class="text-light fs-5 btn-outline-danger btn bg-dark" name="logout" value="Wyloguj">
                             </form>
                         </div> 
                         <?php endif ?>

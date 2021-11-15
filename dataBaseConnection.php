@@ -2,11 +2,11 @@
  //// Database connection, MySQL ////
 
 // Variables
-$serverName = "localhost";
-$userName = "root";
-$password = "";
-$dbName = "pizzaDB";
 $ini = parse_ini_file("app.ini");
+$serverName = $ini['serverName']; //"localhost";
+$userName = $ini['userName']; //"root";
+$password = $ini['password']; // "";
+$dbName = "pizzaDB";
 
 // Create database
 $createDB = $ini['createDatabase'];
@@ -103,6 +103,7 @@ if($createTables)
           `city` varchar(40) NULL,
           `street` varchar(40) NULL,
           `houseNumber` varchar(40) NULL,
+          `status` varchar(40) NOT NULL,
           PRIMARY KEY (id),
           FOREIGN KEY (userId) REFERENCES User(id)
      )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -136,4 +137,9 @@ else
 {
      //echo "DataBase connected";
 }
+
+
+// status : Nie zaakceptowany, Przygotowywanie, W drodze, Do odebrania, Zrealizowane
+
+
 ?>
