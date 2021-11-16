@@ -22,7 +22,7 @@ include('databaseConnection.php');
 
 //// Routes, Requests ////
 
-// Log in 
+// Log in - login.php
 if(isset($_POST['log']))
 {
      // Get user input
@@ -61,7 +61,7 @@ if(isset($_POST['log']))
      }  
 }
 
-// Register
+// Register - register.php
 if(isset($_POST['register']))
 {
      // Get user input
@@ -106,7 +106,7 @@ if(isset($_POST['register']))
      }
 }
 
-// Logout
+// Logout - navbar.php
 if(isset($_GET['logout']))
 {
     session_destroy();
@@ -123,7 +123,7 @@ if(isset($_POST['productName']))
      $_SESSION['productImg'] = $_POST['productImg'];   
 }
 
-// Add item to cart
+// Add item to cart - order.php
 if(isset($_POST['addToCart']))
 {
      $_SESSION['cartProductNumber'] = ($_SESSION['cartProductNumber'] + 1);
@@ -131,7 +131,7 @@ if(isset($_POST['addToCart']))
      header('location: offers.php');
 }
 
-// Remove item from cart
+// Remove item from cart - cart.php
 if(isset($_POST['removeFromCart']))
 {
      // Get data
@@ -158,7 +158,7 @@ if(isset($_POST['removeFromCart']))
      header('location: cart.php');     
 }
 
-// Clear cart
+// Clear cart - cart.php
 if(isset($_GET['clearCart']))
 {
      unset($_SESSION['cartProductNumber']);
@@ -166,7 +166,7 @@ if(isset($_GET['clearCart']))
      header('location: offers.php');
 } 
 
-// Get user orders and show then on the site
+// Get user orders and show then on the site - myOrders.php
 function getUserOrders($connection)
 {
      if($_SESSION['role'] == "user")
@@ -187,7 +187,7 @@ if(isset($_POST['getUserOrders']))
      header('location: myOrders.php'); 
 }
 
-// Make order to DB
+// Make order to DB - cart.php
 if(isset($_POST['makeOrder']))
 {
      $email = $_POST['email'];
@@ -261,21 +261,49 @@ if(isset($_POST['makeOrder']))
      }
 }
 
-// Change order status - only role 'sell'
+// Change order's status and send email to user - only role 'sell' - myOrders.php
 if(isset($_POST['changeOrderStatus']))
 {
      $sqlChangeOrderStatus = "UPDATE ord SET status='{$_POST['status']}' where id='{$_POST['orderId']}'";
      if($connection->query($sqlChangeOrderStatus) === TRUE) 
      {
           $_SESSION['success'] = "Status zamówienia '" . $_POST['orderId'] . "' zmieniony";
+
+          // Send email to user, if certain status was selected
+          if($_POST['status'] == "Do odebrania" | $_POST['status'] == "W drodze") 
+          {
+               // Get order data
+               $sqlGetOrderData = "SELECT products,price,email,city,street,houseNumber from ord where id='{$_POST['orderId']}'";
+               $result = $connection->query($sqlGetOrderData);
+               $data = mysqli_fetch_row($result);
+
+               // Send email to user
+               $ini = parse_ini_file("app.ini");
+               $sendEmailToUser = $ini['sendEmailToUser'];
+               if($sendEmailToUser)
+               {
+                    $to = "smiercior@gmail.com";//$data[2];
+                    $from = "smiercior44@gmail.com";
+                    $fromName = "BestPizza";
+                    $subject = "BestPizza - Twoje zamówienie jest gotowe!";
+                    $message = "Witamy tu BestPizza!\nTwoje zamówienie {$_POST['orderId']} jest : {$_POST['status']}";
+                    $message = $message . "\nDANE ZAMÓWIENIA:\n";
+                    $message = $message . "\n• Produkty: $data[0] \n";
+                    $message = $message . "\n• Cena: $data[1]zł \n";
+                    if($data[3] != "") $message = $message . "\n• Adres dostawy: $data[3], $data[4] $data[5] \n";
+                    $message = $message . "\nŻyczymy miłego dnia :D";
+                    include("sendMail.php");
+                    sentSMTPMail($to,$from,$fromName,$subject,$message);      
+               }
+          }
      }
      else 
      {
           $_SESSION['error'] = "Nie udało się zmienić statusu zamówienia '" . $_POST['orderId'] . "'";
-     }    
+     }   
 }
 
-// Change profile data
+// Change profile data - account.php
 if(isset($_POST['changeProfile']))
 {
      $sqlUpdate = "UPDATE user SET city='{$_POST['city']}', street='{$_POST['street']}', houseNumber='{$_POST['houseNumber']}' where username='{$_SESSION['username']}'";
@@ -293,7 +321,7 @@ if(isset($_POST['changeProfile']))
      }     
 }
 
-// Change user email
+// Change user email - accountEmail.php
 if(isset($_POST['changeEmail']))
 {
      $sqlUpdate = "UPDATE user SET email='{$_POST['email']}' where username='{$_SESSION['username']}'";
@@ -311,7 +339,7 @@ if(isset($_POST['changeEmail']))
      }     
 }
 
-// Delete user account
+// Delete user account - accountDel.php
 if(isset($_POST['deleteAccount']))
 {
      $sqlDel = "DELETE from user where username='{$_SESSION['username']}'";
