@@ -30,7 +30,7 @@ function sentSMTPMail($to,$from,$fromName ,$subject,$body)
     );
 
     $mail->Username = "smiercior44@gmail.com";
-    $mail->Password = "milo2468op!";
+    $mail->Password = "password";
     $mail->setFrom($from,$fromName);
     $mail->Subject = $subject;
     $mail->Body = $body;
