@@ -55,6 +55,10 @@ if(!isset($_SESSION['username'])) header('location: login.php');
                 </div>
                 <form method="POST">
                     <div class="col-12 mb-2">
+                        <input type="text" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="phone" minlength="9" maxlength="9" placeholder="Telefon" <?php if($_SESSION['phone'] != ""): ?> value="<?= $_SESSION['phone']; ?>" <?php endif ?>>
+                    </div>
+
+                    <div class="col-12 mb-2">
                         <input type="text" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="city" placeholder="Miasto" <?php if($_SESSION['city'] != ""): ?> value="<?= $_SESSION['city']; ?>" <?php endif ?>>
                     </div>
 

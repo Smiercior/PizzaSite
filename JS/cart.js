@@ -13,6 +13,9 @@ dataString = dataObject.innerHTML;
 emailString = dataString.substring(dataString.indexOf("email=") + 6,dataString.indexOf(";"));
 
 dataString = dataString.substring(dataString.indexOf(";") + 1, dataString.indexOf("}") + 1); // Cut off email
+phoneString = dataString.substring(dataString.indexOf("phone=") + 6,dataString.indexOf(";"));
+
+dataString = dataString.substring(dataString.indexOf(";") + 1, dataString.indexOf("}") + 1); // Cut off phone
 cityString = dataString.substring(dataString.indexOf("city=") + 5,dataString.indexOf(";"));
 
 dataString = dataString.substring(dataString.indexOf(";") + 1, dataString.indexOf("}") + 1); // Cut off city
@@ -27,12 +30,14 @@ houseNumberString = dataString.substring(dataString.indexOf("houseNumber=") + 12
 if(dataString != "")
 {
     email = `<input type="email" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="email" placeholder="Email" value=${emailString}>`;
+    phone = `<input type="phone" class="btn-outline-primary btn bg-dark form-control w-75 text-light mt-1" name="phone" placeholder="Telefon" value=${phoneString} >`
     city = `<input type="text" class="btn-outline-primary btn bg-dark form-control w-75 text-light mt-1" name="city" placeholder="Miasto" value=${cityString}>`
     street = `<input type="text" class="btn-outline-primary btn bg-dark form-control w-50 text-light mt-1" name="street" placeholder="Ulica" value=${streetString}> <input type="text" class="btn-outline-primary btn bg-dark form-control w-25 text-light mt-1" name="houseNumber" placeholder="Nr.dom" value=${houseNumberString}>`
 } 
 else
 {
     email = `<input type="email" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="email" placeholder="Email">`;
+    phone = `<input type="phone" class="btn-outline-primary btn bg-dark form-control w-75 text-light mt-1" name="phone" placeholder="Telefon">`
     city = '<input type="text" class="btn-outline-primary btn bg-dark form-control w-75 text-light mt-1" name="city" placeholder="Miasto">'
     street = '<input type="text" class="btn-outline-primary btn bg-dark form-control w-50 text-light mt-1" name="street" placeholder="Ulica"> <input type="text" class="btn-outline-primary btn bg-dark form-control w-25 text-light mt-1" name="houseNumber" placeholder="Nr.dom">'
 } 
@@ -40,11 +45,11 @@ else
 // User choose delivery : self
 function change1() 
 { 
-    formInputs.innerHTML = email;
+    formInputs.innerHTML = email + phone;
 }
 
 // User choose delivery : by courier
 function change2() 
 {  
-    formInputs.innerHTML = email + city + street;
+    formInputs.innerHTML = email + phone + city + street;
 }

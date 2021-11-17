@@ -49,7 +49,7 @@ getUserOrders($connection)
 
             <?php if($_SESSION['role'] == "sell"): ?>
                 <div class="col-12 text-start">
-                    <span class="fs-6 text-light"> Użytkownik: <span class="text-primary"><?= $order[9] ?></span>
+                    <span class="fs-6 text-light"> Użytkownik: <span class="text-primary"><?= $order[11] ?></span>
                 </div>
             <?php endif; ?>
 
@@ -82,24 +82,32 @@ getUserOrders($connection)
 
             <div class="col-12 text-start">
                 <span class="fs-6 text-light"> Email: <span class="fs-6 text-info"> <?= $order[4] ?></span> </span>
+            </div>
+            
+            <div class="col-12 text-start">
+                <span class="fs-6 text-light"> Telefon: <span class="fs-6 text-info"> <?= $order[5] ?></span> </span>
             </div> 
 
-            <?php if($order[5] != ""): ?>
+            <?php if($order[6] != ""): ?>
             <div class="col-12 text-start">
-                <span class="fs-6 text-light"> Adres dostawy: <span class="fs-6 text-info"> <?= $order[5] ?>, <?= $order[6] ?> <?= $order[7] ?></span> </span>
+                <span class="fs-6 text-light"> Adres dostawy: <span class="fs-6 text-info"> <?= $order[6] ?>, <?= $order[7] ?> <?= $order[8] ?></span> </span>
             </div>
             <?php endif; ?>
+
+            <div class="col-12 text-start">
+                <span class="fs-6 text-light"> Data złożenia: <span class="fs-6 text-info"> <?= $order[9] ?></span> </span>
+            </div>
             
             <div class="col-12 text-start mb-1">
                 <span class="fs-6 text-light"> Status:
-                    <?php if($order[8]  == "Nie zaakceptowany"): ?>    
-                        <span class="fs-6 text-danger"><?= $order[8] ?></span>
-                    <?php elseif($order[8]  == "Przygotowywanie"): ?>    
-                        <span class="fs-6 text-warning"><?= $order[8] ?></span>
-                    <?php elseif($order[8]  == "W drodze" or $order[8]  == "Do odebrania"): ?>    
-                        <span class="fs-6 text-success"><?= $order[8] ?></span>
-                    <?php elseif($order[8]  == "Zrealizowane"): ?>    
-                        <span class="fs-6 text-muted"><?= $order[8] ?></span>
+                    <?php if($order[10]  == "Nie zaakceptowany"): ?>    
+                        <span class="fs-6 text-danger"><?= $order[10] ?></span>
+                    <?php elseif($order[10]  == "Przygotowywanie"): ?>    
+                        <span class="fs-6 text-warning"><?= $order[10] ?></span>
+                    <?php elseif($order[10]  == "W drodze" or $order[10]  == "Do odebrania"): ?>    
+                        <span class="fs-6 text-success"><?= $order[10] ?></span>
+                    <?php elseif($order[10]  == "Zrealizowane"): ?>    
+                        <span class="fs-6 text-muted"><?= $order[10] ?></span>
                     <?php endif; ?>       
                 </span>
             </div>
@@ -140,7 +148,7 @@ include('Basic Components/footer.php');
 <!-- JavaScript Bundle with Popper -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous" defer></script>
-<script src="JS/myOrders.js" type="text/JavaScript" defer></script>
+<script src="JS/myOrders.js" type="text/JavaScript"></script>
 
 
 </body>

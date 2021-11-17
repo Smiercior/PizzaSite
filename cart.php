@@ -97,6 +97,7 @@ if($_SESSION['cartProducts'] != " ")
                 <?php if(isset($_SESSION['username'])): ?>
                     {
                     email="<?= $_SESSION['email']; ?>";
+                    phone="<?= $_SESSION['phone']; ?>";
                     city="<?= $_SESSION['city']; ?>";
                     street="<?= $_SESSION['street']; ?>";
                     houseNumber="<?= $_SESSION['houseNumber']; ?>";
@@ -108,7 +109,8 @@ if($_SESSION['cartProducts'] != " ")
 
             <div class="col-12 mt-3">         
                 <div id="formInputs" class="text-center">
-                    <input type="email" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="email" placeholder="Email" <?php if(isset($_SESSION['username'])): ?> value="<?= $_SESSION['email']; ?>" <?php endif ?>>
+                    <input type="email" class="btn-outline-primary btn bg-dark form-control w-75 text-light mb-1" name="email" placeholder="Email" <?php if(isset($_SESSION['username'])): ?> value="<?= $_SESSION['email']; ?>" <?php endif ?>>
+                    <input type="phone" class="btn-outline-primary btn bg-dark form-control w-75 text-light" name="phone" placeholder="Telefon" <?php if(isset($_SESSION['username'])): ?> value="<?= $_SESSION['phone']; ?>" <?php endif ?>>
                 </div>
             
             </div>

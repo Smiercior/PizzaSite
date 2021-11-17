@@ -10,6 +10,7 @@ include("PHPMailer-master\PHPMailer-master\src\OAuth.php");
 
 function sentSMTPMail($to,$from,$fromName ,$subject,$body)
 {
+    $ini = parse_ini_file("app.ini");
     $mail = new PHPMailer();
     $mail->isSMTP();
     $mail->SMTPDebug = 0;
@@ -29,8 +30,8 @@ function sentSMTPMail($to,$from,$fromName ,$subject,$body)
         )
     );
 
-    $mail->Username = "smiercior44@gmail.com";
-    $mail->Password = "password";
+    $mail->Username = $ini['emailUserName'];//"smiercior44@gmail.com";
+    $mail->Password = $ini['emailPassword'];//"password";
     $mail->setFrom($from,$fromName);
     $mail->Subject = $subject;
     $mail->Body = $body;

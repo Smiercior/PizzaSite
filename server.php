@@ -39,15 +39,16 @@ if(isset($_POST['log']))
      {
           // Set session variables
           $_SESSION['username'] = $username;
-          $userData = "SELECT id,email,city,street,houseNumber,role from user where username='$username' limit 1";
+          $userData = "SELECT id,email,phone,city,street,houseNumber,role from user where username='$username' limit 1";
           $result = $connection->query($userData);
           $data = mysqli_fetch_row($result);
           $_SESSION['userId'] = $data[0];
           $_SESSION['email'] = $data[1];
-          $_SESSION['city'] = $data[2];
-          $_SESSION['street'] = $data[3];
-          $_SESSION['houseNumber'] = $data[4];
-          $_SESSION['role'] = $data[5];
+          $_SESSION['phone'] = $data[2];
+          $_SESSION['city'] = $data[3];
+          $_SESSION['street'] = $data[4];
+          $_SESSION['houseNumber'] = $data[5];
+          $_SESSION['role'] = $data[6];
 
           unset($result);
           unset($pass);
@@ -171,11 +172,11 @@ function getUserOrders($connection)
 {
      if($_SESSION['role'] == "user")
      {
-          $sqlGetOrders = "SELECT o.id,o.products,o.price,o.type,o.email,o.city,o.street,o.houseNumber,o.status from ord o join user u on u.id = o.userId where username='{$_SESSION['username']}'";
+          $sqlGetOrders = "SELECT o.id,o.products,o.price,o.type,o.email,o.phone,o.city,o.street,o.houseNumber,o.date,o.status from ord o join user u on u.id = o.userId where username='{$_SESSION['username']}'";
      }
      elseif($_SESSION['role'] == "sell")
      {
-          $sqlGetOrders = "SELECT o.id,o.products,o.price,o.type,o.email,o.city,o.street,o.houseNumber,o.status,u.username from ord o join user u on u.id = o.userId";
+          $sqlGetOrders = "SELECT o.id,o.products,o.price,o.type,o.email,o.phone,o.city,o.street,o.houseNumber,o.date,o.status,u.username from ord o join user u on u.id = o.userId";
      }
      
      $result = $connection->query($sqlGetOrders);
@@ -191,24 +192,26 @@ if(isset($_POST['getUserOrders']))
 if(isset($_POST['makeOrder']))
 {
      $email = $_POST['email'];
+     $phone = $_POST['phone'];
      $deliveryType = $_POST['delivery'];
      $price = $_POST['price'];
 
-     if($deliveryType == "self") // Delivery self - only email
+     if($deliveryType == "self") // Delivery self - email, phone
      {
           if($price == 0.0 ) array_push($errors, "Musisz mieć chociaż jeden produkt w koszyku");
           elseif($email == "" ) array_push($errors, "Musisz podać adres email");
+          elseif(strlen($phone) != 9 ) array_push($errors, "Musisz podać prawidłowy numer telefonu");
           if(isset($_SESSION['username'])) // User logged in
           {
-               $sqlInsert = "INSERT INTO ord (userId,type,price,products,email,status) VALUES ('{$_SESSION['userId']}','$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','Nie zaakceptowany')";    
+               $sqlInsert = "INSERT INTO ord (userId,type,price,products,email,phone,date,status) VALUES ('{$_SESSION['userId']}','$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','$phone',NOW(),'Nie zaakceptowany')";    
           }
           else // User isn't logged in
           {
-               $sqlInsert = "INSERT INTO ord (type,price,products,email,status) VALUES ('$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','Nie zaakceptowany')";    
+               $sqlInsert = "INSERT INTO ord (type,price,products,email,phone,date,status) VALUES ('$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','$phone',NOW(),'Nie zaakceptowany')";    
           }
           
      }
-     elseif($deliveryType == "courier") // Delivery by courier - email, city, street, houseNumber
+     elseif($deliveryType == "courier") // Delivery by courier - email, phone, city, street, houseNumber
      {
           $city = $_POST['city'];
           $street = $_POST['street'];
@@ -216,16 +219,17 @@ if(isset($_POST['makeOrder']))
 
           if($price == 0.0 ) array_push($errors, "Musisz mieć chociaż jeden produkt w koszyku");
           elseif($email == "" ) array_push($errors, "Musisz podać adres email");
+          elseif(strlen($phone) != 9 ) array_push($errors, "Musisz podać prawidłowy numer telefonu");
           elseif($city == "" ) array_push($errors, "Musisz podać miasto");
           elseif($street == "" ) array_push($errors, "Musisz podać ulicę");
           elseif($houseNumber == "" ) array_push($errors, "Musisz podać numer domu"); 
           if(isset($_SESSION['username'])) // User logged in
           {
-               $sqlInsert = "INSERT INTO ord (userId,type,price,products,email,city,street,houseNumber,status) VALUES ('{$_SESSION['userId']}','$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','$city','$street','$houseNumber','Nie zaakceptowany')";
+               $sqlInsert = "INSERT INTO ord (userId,type,price,products,email,phone,city,street,houseNumber,date,status) VALUES ('{$_SESSION['userId']}','$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','$phone','$city','$street','$houseNumber',NOW(),'Nie zaakceptowany')";
           }
           else // User isn't logged in
           {
-               $sqlInsert = "INSERT INTO ord (type,price,products,email,city,street,houseNumber,status) VALUES ('$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','$city','$street','$houseNumber','Nie zaakceptowany')";
+               $sqlInsert = "INSERT INTO ord (type,price,products,email,phone,city,street,houseNumber,date,status) VALUES ('$deliveryType',$price,'{$_SESSION['cartProducts']}','$email','$phone','$city','$street','$houseNumber',NOW(),'Nie zaakceptowany')";
           }    
           
      }
@@ -306,10 +310,11 @@ if(isset($_POST['changeOrderStatus']))
 // Change profile data - account.php
 if(isset($_POST['changeProfile']))
 {
-     $sqlUpdate = "UPDATE user SET city='{$_POST['city']}', street='{$_POST['street']}', houseNumber='{$_POST['houseNumber']}' where username='{$_SESSION['username']}'";
+     $sqlUpdate = "UPDATE user SET phone ='{$_POST['phone']}' ,city='{$_POST['city']}', street='{$_POST['street']}', houseNumber='{$_POST['houseNumber']}' where username='{$_SESSION['username']}'";
      if($connection->query($sqlUpdate) === TRUE)
      {
           $_SESSION['success'] = "Dane zostały zapisane";
+          $_SESSION['phone'] = $_POST['phone'];
           $_SESSION['city'] = $_POST['city'];
           $_SESSION['street'] = $_POST['street'];
           $_SESSION['houseNumber'] = $_POST['houseNumber'];
