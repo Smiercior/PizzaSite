@@ -183,6 +183,46 @@ function getUserOrders($connection)
      $data = mysqli_fetch_all($result);
      $_SESSION['orders'] = $data;
 }
+
+function getFilteredUserOrders($connection,$filter)
+{
+     if($filter == "Wszystkie")
+     {
+          if($_SESSION['role'] == "user")
+          {
+               $sqlGetOrders = "SELECT o.id,o.products,o.price,o.type,o.email,o.phone,o.city,o.street,o.houseNumber,o.date,o.status from ord o join user u on u.id = o.userId where username='{$_SESSION['username']}'";
+          }
+          elseif($_SESSION['role'] == "sell")
+          {
+               $sqlGetOrders = "SELECT o.id,o.products,o.price,o.type,o.email,o.phone,o.city,o.street,o.houseNumber,o.date,o.status,u.username from ord o join user u on u.id = o.userId";
+          }
+     }
+     else
+     {
+          $conditionUser = "";
+          $conditionSell = "";
+          if($filter == "Nie zaakceptowane") $condition = "o.status='Nie zaakceptowany'";
+          elseif($filter == "Przygotowywanie") $condition = "o.status='Przygotowywanie'";
+          elseif($filter == "Do odebrania") $condition = "o.status='Do odebrania'";
+          elseif($filter == "W drodze") $condition = "o.status='W drodze'";
+          elseif($filter == "Zrealizowane") $condition = "o.status='Zrealizowane'";
+
+          if($_SESSION['role'] == "user")
+          {
+               $sqlGetOrders = "SELECT o.id,o.products,o.price,o.type,o.email,o.phone,o.city,o.street,o.houseNumber,o.date,o.status from ord o join user u on u.id = o.userId where username='{$_SESSION['username']}' and {$condition}";
+          }
+          elseif($_SESSION['role'] == "sell")
+          {
+               $sqlGetOrders = "SELECT o.id,o.products,o.price,o.type,o.email,o.phone,o.city,o.street,o.houseNumber,o.date,o.status,u.username from ord o join user u on u.id = o.userId where {$condition}";
+          }
+     }
+     
+     
+     $result = $connection->query($sqlGetOrders);
+     $data = mysqli_fetch_all($result);
+     $_SESSION['orders'] = $data;
+}
+
 if(isset($_POST['getUserOrders']))
 {
      header('location: myOrders.php'); 

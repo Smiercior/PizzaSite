@@ -2,7 +2,15 @@
 include('server.php');
 $_SESSION['site'] = "myOrders";
 if(!isset($_SESSION['username'])) header('location: login.php');
-getUserOrders($connection)
+getUserOrders($connection);
+
+// Get filtered user orders and show them on the site - myOrders.php
+if(isset($_POST['filterOrders']))
+{
+    $_SESSION['filterOption'] = $_POST['filterOption'];
+    getFilteredUserOrders($connection,$_POST['filterOption']); 
+}   
+
 ?>
  
 <!DOCTYPE html>
@@ -22,6 +30,23 @@ getUserOrders($connection)
     <?php
     include('Basic Components/navbar.php');
     ?>
+
+    <div class="row w-100 m-0 justify-content-center">
+        <div class="col-12 text-center mt-2 p-0">
+            <form method="POST">
+                <select class="btn-outline-primary btn text-start" name="filterOption">
+                    <option value="Nie zaakceptowane" <?php if($_SESSION['filterOption'] == "Nie zaakceptowane"):?> selected <?php endif; ?> >Nie zaakceptowane</option>
+                    <option value="Przygotowywanie" <?php if($_SESSION['filterOption'] == "Przygotowywanie"):?> selected <?php endif; ?> >Przygotowywanie</option>
+                    <option value="Do odebrania" <?php if($_SESSION['filterOption'] == "Do odebrania"):?> selected <?php endif; ?> >Do odebrania</option>
+                    <option value="W drodze" <?php if($_SESSION['filterOption'] == "W drodze"):?> selected <?php endif; ?> >W drodze</option>
+                    <option value="Zrealizowane" <?php if($_SESSION['filterOption'] == "Zrealizowane"):?> selected <?php endif; ?> >Zrealizowane</option>
+                    <option value="Wszystkie" <?php if($_SESSION['filterOption'] == "Wszystkie"):?> selected <?php endif; ?>>Wszystkie zamówienia</option>
+                </select>
+                <input type="submit" class="btn-outline-primary btn" name="filterOrders" value="Filtruj">
+            </form>
+        </div>
+    </div>
+    
 
     <?php if(isset($_SESSION['success'])): ?>
         <div class="row w-100 justify-content-center mt-4 text-light">
