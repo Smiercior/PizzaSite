@@ -1,0 +1,90 @@
+@media(min-width: 2901px)
+{
+    .btnR
+    {
+        font-size: 400%;
+    }
+    .span5
+    {
+        font-size: 450%;
+    }
+    .span6
+    {
+        font-size: 400%;
+    }
+}
+@media (min-width: 2201px) and (max-width: 2900px)
+{
+    .btnR
+    {
+        font-size: 250%;
+    }
+    .span5
+    {
+        font-size: 250%;
+    }
+    .span6
+    {
+        font-size: 200%;
+    }
+}
+@media (min-width: 1001px) and (max-width: 2200px )
+{
+    .btnR
+    {
+        font-size: 130%;
+    }
+    .span5
+    {
+        font-size: 160%;
+    }
+    .span6
+    {
+        font-size: 110%;
+    }
+}
+@media (min-width: 801px) and (max-width: 1000px )
+{
+    .btnR
+    {
+        font-size: 50%;
+    }
+    .span5
+    {
+        font-size: 150%;
+    }
+    .span6
+    {
+        font-size: 100%;
+    }
+}
+@media (min-width:401px) and (max-width: 800px)
+{
+    .btnR
+    {
+        font-size: 25%;
+    }
+    .span5
+    {
+        font-size: 75%;
+    }
+    .span6
+    {
+        font-size: 75%;
+    }
+}
+@media(max-width: 400px)
+{
+    .btnR
+    {
+        font-size: 20%;
+    }
+    .span5
+    {
+        font-size: 30%;
+    }
+    .span6
+    {
+        font-size: 30%;
+    }
+}

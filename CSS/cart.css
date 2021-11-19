@@ -1,0 +1,113 @@
+@media(min-width: 2901px)
+{
+    .btnC
+    {
+        font-size: 400%;
+    }
+    .span4
+    {
+        font-size: 450%;
+    }
+    .span5
+    {
+        font-size: 350%;
+    }
+    .span6
+    {
+        font-size: 350%;
+    }
+}
+@media (min-width: 2201px) and (max-width: 2900px)
+{
+    .btnC
+    {
+        font-size: 250%;
+    }
+    .span4
+    {
+        font-size: 250%;
+    }
+    .span5
+    {
+        font-size: 250%;
+    }
+    .span6
+    {
+        font-size: 150%;
+    }
+}
+@media (min-width: 801px) and (max-width: 2200px )
+{
+    .btnC
+    {
+        font-size: 110%;
+    }
+    .span4
+    {
+        font-size: 150%;
+    }
+    .span5
+    {
+        font-size: 125%;
+    }
+    .span6
+    {
+        font-size: 100%;
+    }
+}
+@media (min-width:401px) and (max-width: 800px)
+{
+    .btnSm
+    {
+        padding: 30%;
+    }
+    .btnC
+    {
+        font-size: 50%;
+    }
+    .radio
+    {
+        width: 10px;
+        height: 10px;
+    }
+    .span4
+    {
+        font-size: 75%;
+    }
+    .span5
+    {
+        font-size: 75%;
+    }
+    .span6
+    {
+        font-size: 50%;
+    }
+}
+@media(max-width: 400px)
+{
+    .btnSm
+    {
+        padding: 10%;
+    }
+    .btnC
+    {
+        font-size: 10%;
+    }
+    .radio
+    {
+        width: 5px;
+        height: 5px;
+    }
+    .span4
+    {
+        font-size: 20%;
+    }
+    .span5
+    {
+        font-size: 55%;
+    }
+    .span6
+    {
+        font-size: 15%;
+    }
+}

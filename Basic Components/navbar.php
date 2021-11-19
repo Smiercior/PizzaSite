@@ -12,40 +12,40 @@
                             <img src="Img/logopizz.png" width="75%" height="75%">
                             </li>
                             <li class="nav-item  align-middle">
-                                <a id="Index" class="nav-link <?php if($_SESSION['site'] == "index"){ echo "text-primary";} else{echo "text-light";}?> fs-4" href="index.php">Strona główna</a>
+                                <a id="Index" class="nav-link <?php if($_SESSION['site'] == "index"){ echo "text-primary";} else{echo "text-light";}?>" href="index.php">Strona główna</a>
                             </li>
                             <li class="nav-item">
-                                <a id="Cars" class="nav-link <?php if($_SESSION['site'] == "offers"){ echo "text-primary";} else{echo "text-light";}?> fs-4" href="offers.php">Oferty</a>
+                                <a id="Cars" class="nav-link <?php if($_SESSION['site'] == "offers"){ echo "text-primary";} else{echo "text-light";}?>" href="offers.php">Oferty</a>
                             </li>
                             <li class="nav-item">
-                                <a id="Orders" class="nav-link <?php if($_SESSION['site'] == "about"){ echo "text-primary";} else{echo "text-light";}?> fs-4" href="about.php">O Nas</a>
+                                <a id="Orders" class="nav-link <?php if($_SESSION['site'] == "about"){ echo "text-primary";} else{echo "text-light";}?>" href="about.php">O Nas</a>
                             </li>
                             <li class="nav-item">
-                                <a id="Contact" class="nav-link <?php if($_SESSION['site'] == "contact"){ echo "text-primary";} else{echo "text-light";}?> fs-4" href="contact.php">Kontakt</a>
+                                <a id="Contact" class="nav-link <?php if($_SESSION['site'] == "contact"){ echo "text-primary";} else{echo "text-light";}?>" href="contact.php">Kontakt</a>
                             </li>
                         </ul>
                         <?php if(!isset($_SESSION['username'])) : ?>
                         <div class="d-grid gap-2 d-flex justify-content-end w-100">
-                            <a class="text-light fs-4 btn-outline-success btn bg-dark" href="login.php">Zaloguj</a>
-                            <a class="text-light fs-4 btn-outline-success btn bg-dark" href="register.php">Zarejestruj</a>
+                            <a class="text-light btn-outline-success btn bg-dark" href="login.php">Zaloguj</a>
+                            <a class="text-light btn-outline-success btn bg-dark" href="register.php">Zarejestruj</a>
                         </div>
                         
                         <?php elseif(isset($_SESSION['username'])) : ?>
                         <div class="d-grid gap-2 d-flex justify-content-end w-100">
                             <?php if($_SESSION['role'] == "sell"): ?>
                                 <form method="POST">
-                                    <input type="submit" class="text-light fs-5 btn-outline-warning btn bg-dark" name="getUserOrders" value="Wszystkie zamówienia">
+                                    <input type="submit" class="text-light btn-outline-warning btn bg-dark" name="getUserOrders" value="Wszystkie zamówienia">
                                 </form>
                             <?php elseif($_SESSION['role'] == "user"): ?>
                                 <form method="POST">
-                                    <input type="submit" class="text-light fs-5 btn-outline-warning btn bg-dark" name="getUserOrders" value="Moje zamówienia">
+                                    <input type="submit" class="text-light btn-outline-warning btn bg-dark" name="getUserOrders" value="Moje zamówienia">
                                 </form>
                             <?php endif ?>
 
-                            <a class="text-light fs-5 btn-outline-success btn bg-dark" href="account.php">Moje konto</a>
+                            <a class="text-light btn-outline-success btn bg-dark" href="account.php">Moje konto</a>
                             
                             <form method="GET" accept="index.php">
-                                <input type="submit" class="text-light fs-5 btn-outline-danger btn bg-dark" name="logout" value="Wyloguj">
+                                <input type="submit" class="text-light btn-outline-danger btn bg-dark" name="logout" value="Wyloguj">
                             </form>
                         </div> 
                         <?php endif ?>

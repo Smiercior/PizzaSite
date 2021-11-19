@@ -12,7 +12,7 @@ $_SESSION['site'] = "index";
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="style.css">
-
+<link rel="stylesheet" href="CSS/index.css">
 <!-- JavaScript Bundle with Popper -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous" defer></script>
@@ -27,7 +27,7 @@ $_SESSION['site'] = "index";
     <?php if(isset($_SESSION['success'])): ?>
         <div class="row w-100 justify-content-center mt-4 text-light">
             <div class="col-4 text-center border border-2 border-secondary">
-                <p class="mt-2 mb-2 fs-5"><span class="text-success"><?= $_SESSION['success'] ?></span></p>
+                <p class="mt-2 mb-2"><span class="text-success"><?= $_SESSION['success'] ?></span></p>
             </div>
         </div>
         <?php unset($_SESSION['success']); ?>
@@ -36,7 +36,7 @@ $_SESSION['site'] = "index";
     <?php if(isset($_SESSION['error'])): ?>
         <div class="row w-100 justify-content-center mt-4 text-light">
             <div class="col-4 text-center border border-2 border-secondary">
-                <p class="mt-2 mb-2 fs-5"><span class="text-danger"><?= $_SESSION['error'] ?></span></p>
+                <p class="mt-2 mb-2"><span class="text-danger"><?= $_SESSION['error'] ?></span></p>
             </div>
         </div>
         <?php unset($_SESSION['error']); ?>
@@ -45,7 +45,7 @@ $_SESSION['site'] = "index";
     <?php if(isset($_SESSION['username'])) : ?>
     <div class="row w-100 justify-content-center mt-4 text-light">
         <div class="col-4 text-center border border-2 border-secondary">
-            <p class="mt-2 mb-2 fs-5">Witaj <span class="text-primary"><?php echo $_SESSION['username']; ?></span></p>
+            <p class="mt-2 mb-2 ">Witaj <span class="text-primary"><?php echo $_SESSION['username']; ?></span></p>
         </div>
     </div>
     <?php endif ?>
@@ -95,7 +95,7 @@ $_SESSION['site'] = "index";
 
     <div class="row w-100 justify-content-center mb-4">
         <div class="col-8 text-center border border-2 border-secondary">
-            <p class="mt-2 mb-2 fs-4 text-primary">Jedynie świeże składniki, zamawiane lokalnie</p>
+            <p class="mt-2 mb-2 fsB text-primary">Jedynie świeże składniki, zamawiane lokalnie</p>
             <p class="text-light">Dbamy w naszej kuchni by składniki były jak najwyższej jakości. Każdą pizze traktujemy wyjątkowo i staramy
                 się serwować jak najdoskonalszy smak. Nasza obsługa jest wykwalifikowana i silnie pracuje by zadowolić każdego kilenta </p>
             <a href="offers.php" type="button" class="btn btn-success mb-2">Zamów online!</a>
@@ -104,9 +104,9 @@ $_SESSION['site'] = "index";
 
     <div class="row w-100 m-0 openHours justify-content-center">
         <div class="col-3 mt-4">
-            <ul class="list-group">
-                <li class="list-group-item  openHours text-center">
-                    <p class="text-light fs-5"> Godziny otwarcia </p>
+            <ul class="list-group mb-4">
+                <li class="list-group-item openHours text-center">
+                    <p class="text-light"> Godziny otwarcia </p>
                 </li>
                 <li class="list-group-item  openHours">
                     <p class="text-light"> Pon <span class="text-success">8.00-20.00</span> </p>

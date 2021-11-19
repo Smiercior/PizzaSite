@@ -1,0 +1,164 @@
+@media(min-width: 2901px)
+{
+    .btnO
+    {
+        font-size: 400%;
+    }
+    .span4
+    {
+        font-size: 550%;
+    }
+    .span6
+    {
+        font-size: 350%;
+    }
+    .span7
+    {
+        font-size: 300%;
+    }
+}
+@media (min-width: 2201px) and (max-width: 2900px)
+{
+    .btnO
+    {
+        font-size: 250%;
+    }
+    .span4
+    {
+        font-size: 350%;
+    }
+    .span6
+    {
+        font-size: 150%;
+    }
+    .span7
+    {
+        font-size: 100%;
+    }
+}
+@media (min-width: 1001px) and (max-width: 2200px )
+{
+    .btnO
+    {
+        font-size: 90%;
+    }
+    .span4
+    {
+        font-size: 190%;
+    }
+    .span6
+    {
+        font-size: 100%;
+    }
+    .span7
+    {
+        font-size: 80%;
+    }
+}
+@media (min-width: 801px) and (max-width: 1000px )
+{
+    .img
+    {
+        width: 100%;
+        height: 75%;
+    }
+    .btnO
+    {
+        font-size: 50%;
+    }
+    .span4
+    {
+        font-size: 135%;
+    }
+    .span6
+    {
+        font-size: 75%;
+    }
+    .span7
+    {
+        font-size: 50%;
+    }
+}
+@media (min-width:601px) and (max-width: 800px)
+{
+    .img
+    {
+        width: 110%;
+        height: 75%;
+    }
+    .btnO
+    {
+        font-size: 25%;
+    }
+    .span4
+    {
+        font-size: 65%;
+    }
+    .span6
+    {
+        font-size: 45%;
+    }
+    .span7
+    {
+        font-size: 40%;
+    }
+}
+@media(min-width:401px) and (max-width:600px)
+{
+    img
+    {
+        width: 110%;
+        height: 50%;
+    }
+    .btnO
+    {
+        font-size: 20%;
+    }
+    .radio
+    {
+        width: 10px;
+        height: 10px;
+    }
+    .span4
+    {
+        font-size: 55%;
+    }
+
+    .span6
+    {
+        font-size: 35%;
+    }
+    .span7
+    {
+        font-size: 30%;
+    }
+}
+@media(max-width: 400px)
+{
+    img
+    {
+        width: 25%;
+        height: 10%;
+    }
+    .btnO
+    {
+        font-size: 5%;
+    }
+    .radio
+    {
+        width: 5px;
+        height: 5px;
+    }
+    .span4
+    {
+        font-size: 15%;
+    }
+    .span6
+    {
+        font-size: 18%;
+    }
+    .span7
+    {
+        font-size: 15%;
+    }
+}

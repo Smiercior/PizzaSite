@@ -1,0 +1,162 @@
+.cartDiv
+{
+    margin-bottom: 1%;
+}
+
+@media(min-width: 2901px)
+{
+    .cartIcon
+    {
+        width: 170px;
+        height: 170px;
+    }
+    .cartText
+    {
+        font-size: 150%;
+    }
+    .span2
+    {
+        font-size: 600%;
+    }
+    .span3
+    {
+        font-size: 500%;
+    }
+    .span4
+    {
+        font-size: 450%;
+    }
+    .span5
+    {
+        font-size: 350%;
+    }
+}
+@media (min-width: 2201px) and (max-width: 2900px)
+{
+    .cartIcon
+    {
+        width: 150px;
+        height: 150px;
+    }
+    .cartText
+    {
+        font-size: 150%;
+    }
+    .span2
+    {
+        font-size: 400%;
+    }
+    .span3
+    {
+        font-size: 300%;
+    }
+    .span4
+    {
+        font-size: 250%;
+    }
+    .span5
+    {
+        font-size: 150%;
+    }
+}
+@media (min-width: 801px) and (max-width: 2200px )
+{
+    .cartIcon
+    {
+        width: 75px;
+        height: 75px;
+    }
+    .cartText
+    {
+        font-size: 75%;
+    }
+    .span2
+    {
+        font-size: 300%;
+    }
+    .span3
+    {
+        font-size: 200%;
+    }
+    .span4
+    {
+        font-size: 150%;
+    }
+    .span5
+    {
+        font-size: 100%;
+    }
+}
+@media (min-width:401px) and (max-width: 800px)
+{
+    .cartIcon
+    {
+        width: 25px;
+        height: 25px;
+    }
+    .cartText
+    {
+        font-size: 25%;
+    }
+    .btnSm
+    {
+        padding: 15%;
+    }
+    .span2
+    {
+        font-size: 150%;
+    }
+    .span3
+    {
+        font-size: 100%;
+    }
+    .span4
+    {
+        font-size: 75%;
+    }
+    .span5
+    {
+        font-size: 50%;
+    }
+}
+@media(max-width: 400px)
+{
+    .cartIcon
+    {
+        width: 15px;
+        height: 15px;
+    }
+    .cartText
+    {
+        font-size: 70%;
+    }
+    .colSM
+    {
+        height: 30px;
+    }
+    .colSm
+    {
+        width: 120%;
+        height: 10%;
+    }
+    .btnSm
+    {
+        padding: 10%;
+    }
+    .span2
+    {
+        font-size: 100%;
+    }
+    .span3
+    {
+        font-size: 75%;
+    }
+    .span4
+    {
+        font-size: 20%;
+    }
+    .span5
+    {
+        font-size: 25%;
+    }
+}

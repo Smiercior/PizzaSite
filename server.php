@@ -9,6 +9,7 @@ if(!isset($_SESSION['cartProducts']))
 {
      $_SESSION['cartProducts'] = " ";
 }
+$_SESSION['filterOption'] = "Wszystkie";
 
 //// Variables ////
 $json = file_get_contents("products.json");
@@ -115,7 +116,7 @@ if(isset($_GET['logout']))
     header('location: index.php');
 }
 
-// For order.php, store chosen product name
+// For order.php, store chosen product name - offers.php, using script.js
 if(isset($_POST['productName']))
 {
      $_SESSION['productName'] = $_POST['productName'];
