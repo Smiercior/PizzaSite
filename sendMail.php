@@ -1,5 +1,5 @@
 <?php
-require_once 'C:\xampp\phpMyAdmin\vendor\autoload.php';
+//require_once 'C:\xampp\phpMyAdmin\vendor\autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 include("PHPMailer-master\PHPMailer-master\src\SMTP.php");

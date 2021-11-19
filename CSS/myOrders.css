@@ -1,5 +1,9 @@
 @media(min-width: 2901px)
 {
+    .btnMO
+    {
+        font-size: 400%;
+    }
     .span5
     {
         font-size: 350%;
@@ -11,6 +15,10 @@
 }
 @media (min-width: 2201px) and (max-width: 2900px)
 {
+    .btnMO
+    {
+        font-size: 250%;
+    }
     .span5
     {
         font-size: 250%;
@@ -22,6 +30,10 @@
 }
 @media (min-width: 1001px) and (max-width: 2200px )
 {
+    .btnMO
+    {
+        font-size: 120%;
+    }
     .span5
     {
         font-size: 150%;
@@ -33,6 +45,10 @@
 }
 @media (min-width: 801px) and (max-width: 1000px )
 {
+    .btnMO
+    {
+        font-size: 50%;
+    }
     .btnL
     {
         font-size: 50%;
@@ -48,6 +64,10 @@
 }
 @media (min-width:401px) and (max-width: 800px)
 {
+    .btnMO
+    {
+        font-size: 40%;
+    }
     .span5
     {
         font-size: 75%;
@@ -59,6 +79,10 @@
 }
 @media(max-width: 400px)
 {
+    .btnMO
+    {
+        font-size: 5%;
+    }
     .span5
     {
         font-size: 55%;

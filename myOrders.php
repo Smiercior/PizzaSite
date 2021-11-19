@@ -143,7 +143,7 @@ if(isset($_POST['filterOrders']))
                     <form method="POST">
                         <div class="row">
                             <div class="col-12 mt-1">
-                                <select class="btn-outline-danger btn" id="statusSelect" name="status">
+                                <select class="btn-outline-danger text-start btn btnMO" id="statusSelect" name="status">
                                     <option value="Nie zaakceptowany">Nie zaakceptowany</option>
                                     <option value="Przygotowywanie">Przygotowywanie</option>
                                     <?php if($order[3]  == "courier"): ?>
@@ -157,7 +157,7 @@ if(isset($_POST['filterOrders']))
 
                             <div class="col-12 mt-1 mb-2">
                                 <input name="orderId" value="<?= $order[0] ?>" hidden>
-                                <input type="submit" class="btn-outline-success btn" name="changeOrderStatus" value="Zatualizuj status">
+                                <input type="submit" class="btn-outline-success btn btnMO" name="changeOrderStatus" value="Zatualizuj status">
                             </div>
                         </div>     
                     </form>
