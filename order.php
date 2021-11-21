@@ -31,9 +31,11 @@ $prices = explode(",",$_SESSION['productPrice']);
                 <div class="col-12">
                     <span class="span4 text-light"> <?= $_SESSION['productName'] ?> </span>
                 </div>
+
                 <div class="col-12 mb-2 text-start">
                     <span class="span6 text-secondary"> Rozmiar </span>
                 </div>
+
                 <div class="col-12 mb-2">
                     <div class="row">
                         <form method="POST">
@@ -76,6 +78,7 @@ $prices = explode(",",$_SESSION['productPrice']);
                     
                 </div>
             </div>
+            
             <?php if( $_SESSION['productComposition'] != ""): ?>
             <div class="row">
                 <div class="col-12">

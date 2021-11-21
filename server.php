@@ -1,5 +1,5 @@
 <?php
-//// Session ////
+//// Session variables ////
 session_start();
 if(!isset($_SESSION['cartProductNumber']))
 {
@@ -36,7 +36,7 @@ if(isset($_POST['log']))
      $pass = mysqli_fetch_row($result);
      
      // Check password
-     if(password_verify($password,$pass[0]))
+     if(password_verify($password,$pass[0])) // Correct password
      {
           // Set session variables
           $_SESSION['username'] = $username;
@@ -55,7 +55,7 @@ if(isset($_POST['log']))
           unset($pass);
           header('location: index.php');
      }
-     else
+     else // Incorrect password
      {
           unset($result);
           unset($pass);
@@ -95,12 +95,12 @@ if(isset($_POST['register']))
           {
                $hashPassword = password_hash($password,PASSWORD_BCRYPT); // PASSWORD_BCRYPT - lenght 60
                $sqlInsert = "INSERT INTO user (username,pass,email,role) VALUES ('$username','$hashPassword','$email','user')";
-               if($connection->query($sqlInsert) === TRUE)
+               if($connection->query($sqlInsert) === TRUE) // User account created
                {
                     $_SESSION['success'] = "Udało ci się utworzyć konto";
                     header('location: index.php'); 
                }
-               else 
+               else // Some error occured
                {
                     array_push($errors, "Nie udało się stworzyć konta");
                }       
@@ -116,7 +116,7 @@ if(isset($_GET['logout']))
     header('location: index.php');
 }
 
-// For order.php, store chosen product name - offers.php, using script.js
+// For order.php, store chosen product name using JS/script.js - offers.php
 if(isset($_POST['productName']))
 {
      $_SESSION['productName'] = $_POST['productName'];
@@ -144,11 +144,11 @@ if(isset($_POST['removeFromCart']))
      // Delete certain product from cart and save other products to temp string
      foreach($productsArray as $product)
      {
-          if($product != $delProduct)
+          if($product != $delProduct) // Add to cart all products excluding delProduct
           {
                $newCartProducts = $newCartProducts . $product . ",";
           }
-          else // Decrease product numbers in cart
+          else // Decrease product numbers in cart if delProduct was detected
           {
                $_SESSION['cartProductNumber'] -= 1;
           } 
@@ -169,7 +169,7 @@ if(isset($_GET['clearCart']))
 } 
 
 // Get user orders and show then on the site - myOrders.php
-function getUserOrders($connection)
+function getUserOrders($connection) // Get all user orders
 {
      if($_SESSION['role'] == "user")
      {
@@ -185,7 +185,7 @@ function getUserOrders($connection)
      $_SESSION['orders'] = $data;
 }
 
-function getFilteredUserOrders($connection,$filter)
+function getFilteredUserOrders($connection,$filter) // Get filtered user orders
 {
      if($filter == "Wszystkie")
      {
@@ -232,11 +232,13 @@ if(isset($_POST['getUserOrders']))
 // Make order to DB - cart.php
 if(isset($_POST['makeOrder']))
 {
+     // Get order data
      $email = $_POST['email'];
      $phone = $_POST['phone'];
      $deliveryType = $_POST['delivery'];
      $price = $_POST['price'];
 
+     // Send order to DB
      if($deliveryType == "self") // Delivery self - email, phone
      {
           if($price == 0.0 ) array_push($errors, "Musisz mieć chociaż jeden produkt w koszyku");
@@ -277,14 +279,14 @@ if(isset($_POST['makeOrder']))
 
      if(count($errors) == 0) // If data is correct
      {
-          if($connection->query($sqlInsert) === TRUE) 
+          if($connection->query($sqlInsert) === TRUE)  // Order was send to DB
           {
                $_SESSION['success'] = "Zamówienie zostało złożone";
                unset($_SESSION['cartProductNumber']);
                unset($_SESSION['cartProducts']);
                header('location: offers.php'); 
           }
-          else 
+          else // Some error occured
           {
                $_SESSION['error'] = "Nie udało się złożyć zamówienia";
                header('location: offers.php');
@@ -306,53 +308,58 @@ if(isset($_POST['makeOrder']))
      }
 }
 
-// Change order's status and send email to user - only role 'sell' - myOrders.php
+// Change order's status and send email to user - only role 'sell' can do that - myOrders.php
 if(isset($_POST['changeOrderStatus']))
 {
-     $sqlChangeOrderStatus = "UPDATE ord SET status='{$_POST['status']}' where id='{$_POST['orderId']}'";
-     if($connection->query($sqlChangeOrderStatus) === TRUE) 
+     if($_SESSION['role'] == "sell") // Check if user have role : sell ( seller )
      {
-          $_SESSION['success'] = "Status zamówienia '" . $_POST['orderId'] . "' zmieniony";
-
-          // Send email to user, if certain status was selected
-          if($_POST['status'] == "Do odebrania" | $_POST['status'] == "W drodze") 
+          // Update order status in DB
+          $sqlChangeOrderStatus = "UPDATE ord SET status='{$_POST['status']}' where id='{$_POST['orderId']}'";
+          if($connection->query($sqlChangeOrderStatus) === TRUE) // If order was updated
           {
-               // Get order data
-               $sqlGetOrderData = "SELECT products,price,email,city,street,houseNumber from ord where id='{$_POST['orderId']}'";
-               $result = $connection->query($sqlGetOrderData);
-               $data = mysqli_fetch_row($result);
+               $_SESSION['success'] = "Status zamówienia '" . $_POST['orderId'] . "' zmieniony";
 
-               // Send email to user
-               $ini = parse_ini_file("app.ini");
-               $sendEmailToUser = $ini['sendEmailToUser'];
-               if($sendEmailToUser)
+               // Send email to user, if certain status was selected
+               if($_POST['status'] == "Do odebrania" | $_POST['status'] == "W drodze") 
                {
-                    $to = "smiercior@gmail.com";//$data[2];
-                    $from = "smiercior44@gmail.com";
-                    $fromName = "BestPizza";
-                    $subject = "BestPizza - Twoje zamówienie jest gotowe!";
-                    $message = "Witamy tu BestPizza!\nTwoje zamówienie {$_POST['orderId']} jest : {$_POST['status']}";
-                    $message = $message . "\nDANE ZAMÓWIENIA:\n";
-                    $message = $message . "\n• Produkty: $data[0] \n";
-                    $message = $message . "\n• Cena: $data[1]zł \n";
-                    if($data[3] != "") $message = $message . "\n• Adres dostawy: $data[3], $data[4] $data[5] \n";
-                    $message = $message . "\nŻyczymy miłego dnia :D";
-                    include("sendMail.php");
-                    sentSMTPMail($to,$from,$fromName,$subject,$message);      
+                    // Get order data
+                    $sqlGetOrderData = "SELECT products,price,email,city,street,houseNumber from ord where id='{$_POST['orderId']}'";
+                    $result = $connection->query($sqlGetOrderData);
+                    $data = mysqli_fetch_row($result);
+
+                    // Send email to user
+                    $ini = parse_ini_file("app.ini");
+                    $sendEmailToUser = $ini['sendEmailToUser'];
+                    if($sendEmailToUser)
+                    {
+                         $to = $data[2]; //"smiercior@gmail.com"
+                         $from = "smiercior44@gmail.com";
+                         $fromName = "BestPizza";
+                         $subject = "BestPizza - Twoje zamówienie jest gotowe!";
+                         $message = "Witamy tu BestPizza!\nTwoje zamówienie nr.{$_POST['orderId']} jest : {$_POST['status']}";
+                         $message = $message . "\nDANE ZAMÓWIENIA:\n";
+                         $message = $message . "\n• Produkty: $data[0] \n";
+                         $message = $message . "\n• Cena: $data[1]zł \n";
+                         if($data[3] != "") $message = $message . "\n• Adres dostawy: $data[3], $data[4] $data[5] \n";
+                         $message = $message . "\nŻyczymy miłego dnia :D";
+                         include("sendMail.php");
+                         sendSMTPMail($to,$from,$fromName,$subject,$message);      
+                    }
                }
-          }
+          } // If error occured
+          else 
+          {
+               $_SESSION['error'] = "Nie udało się zmienić statusu zamówienia '" . $_POST['orderId'] . "'";
+          }   
      }
-     else 
-     {
-          $_SESSION['error'] = "Nie udało się zmienić statusu zamówienia '" . $_POST['orderId'] . "'";
-     }   
 }
 
 // Change profile data - account.php
 if(isset($_POST['changeProfile']))
 {
+     // Update user data in DB
      $sqlUpdate = "UPDATE user SET phone ='{$_POST['phone']}' ,city='{$_POST['city']}', street='{$_POST['street']}', houseNumber='{$_POST['houseNumber']}' where username='{$_SESSION['username']}'";
-     if($connection->query($sqlUpdate) === TRUE)
+     if($connection->query($sqlUpdate) === TRUE) // If data was updated
      {
           $_SESSION['success'] = "Dane zostały zapisane";
           $_SESSION['phone'] = $_POST['phone'];
@@ -360,7 +367,7 @@ if(isset($_POST['changeProfile']))
           $_SESSION['street'] = $_POST['street'];
           $_SESSION['houseNumber'] = $_POST['houseNumber'];
      }
-     else 
+     else  // If error occured
      {
           //var_dump($connection->error);
           array_push($errors, "Nie udało się zmienić danych");
@@ -370,14 +377,15 @@ if(isset($_POST['changeProfile']))
 // Change user email - accountEmail.php
 if(isset($_POST['changeEmail']))
 {
+     // Change user email in DB
      $sqlUpdate = "UPDATE user SET email='{$_POST['email']}' where username='{$_SESSION['username']}'";
-     if($connection->query($sqlUpdate) === TRUE)
+     if($connection->query($sqlUpdate) === TRUE) // If user email was updated
      {
           $_SESSION['success'] = "Email został zmieniony";
           $_SESSION['email'] = $_POST['email'];
           header('location: account.php');
      }
-     else 
+     else // If error occured
      {
           //var_dump($connection->error);
           array_push($errors, "Nie udało się zmienić emaila");
@@ -388,15 +396,16 @@ if(isset($_POST['changeEmail']))
 // Delete user account - accountDel.php
 if(isset($_POST['deleteAccount']))
 {
+     // Delete user account from DB
      $sqlDel = "DELETE from user where username='{$_SESSION['username']}'";
-     if($connection->query($sqlDel) === TRUE) 
+     if($connection->query($sqlDel) === TRUE) // If user account was deleted 
      {
           session_destroy();
           session_start();
           $_SESSION['success'] = "Konto zostało pomyślnie usunięte";
           header('location: index.php'); 
      }
-     else 
+     else // If error occured
      {
           $_SESSION['error'] = "Nie udało się usunąc konta";
           header('location: index.php'); 

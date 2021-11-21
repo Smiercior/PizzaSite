@@ -3,6 +3,7 @@ include("server.php");
 $_SESSION['site'] = "offers";
 $allCategories = array($pizzas, $salades, $chips, $drinks);
  ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -49,7 +50,6 @@ $allCategories = array($pizzas, $salades, $chips, $drinks);
             <span class="text-light span2 "> Menu </span>
         </div>
         <div class="border border-2 border-secondary mb-2"></div>
-
 
         <?php $i = 0; foreach($allCategories as $category):?>
             <div class="col-12 <?php if($i != 0): ?>mt-5 <?php endif; ?>">

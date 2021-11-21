@@ -21,7 +21,6 @@ $_SESSION['site'] = "contact";
 </head>
 
 <body>
-
 <div class="container-fluid overflow-hidden px-0 bg-black log-container">
     <?php
     include('Basic Components/navbar.php');
@@ -67,6 +66,4 @@ $_SESSION['site'] = "contact";
 <?php
 include('Basic Components/footer.php');
 ?>
-
-
 </body>

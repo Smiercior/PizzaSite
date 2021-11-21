@@ -1,4 +1,4 @@
-function makeOrder(productName, productComposition, productPrice, img)
+function makeOrder(productName, productComposition, productPrice, img) // Get produtcs data from json file
 {
     $.ajax({
         type: 'post',

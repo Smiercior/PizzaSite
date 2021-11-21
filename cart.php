@@ -1,7 +1,7 @@
 <?php
 // Get variables
 include("server.php");
-$_SESSION['site'] = "order";
+$_SESSION['site'] = "cart";
 
 // Count products price
 $sum = 0.0;
@@ -53,6 +53,7 @@ if($_SESSION['cartProducts'] != " ")
         <div class="col-12 text-center text-warning mt-1">
             <?php if($_SESSION['cartProducts'] != " "): ?>
                 <?php $productsArray = explode(",",$_SESSION['cartProducts']) ?>
+
                 <?php foreach($productsArray as $product): ?>
                     <?php if($product != ""): ?>
                         <div class="col-12 mb-1">

@@ -1,7 +1,7 @@
 <?php
  //// Database connection, MySQL ////
 
-// Variables
+// Variables, database connection data
 $ini = parse_ini_file("app.ini");
 $serverName = $ini['serverName']; //"localhost";
 $userName = $ini['userName']; //"root";
@@ -140,9 +140,4 @@ else
 {
      //echo "DataBase connected";
 }
-
-
-// status : Nie zaakceptowany, Przygotowywanie, W drodze, Do odebrania, Zrealizowane
-
-
 ?>

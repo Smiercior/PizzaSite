@@ -2,6 +2,8 @@
 include('server.php');
 $_SESSION['site'] = "myOrders";
 if(!isset($_SESSION['username'])) header('location: login.php');
+
+// Get user orders
 getUserOrders($connection);
 
 // Get filtered user orders and show them on the site - myOrders.php
@@ -10,7 +12,6 @@ if(isset($_POST['filterOrders']))
     $_SESSION['filterOption'] = $_POST['filterOption'];
     getFilteredUserOrders($connection,$_POST['filterOption']); 
 }   
-
 ?>
  
 <!DOCTYPE html>
@@ -26,7 +27,6 @@ if(isset($_POST['filterOrders']))
 </head>
 
 <body>
-
 <div class="container-fluid overflow-hidden px-0 bg-black log-container">
     <?php
     include('Basic Components/navbar.php');
@@ -175,8 +175,6 @@ include('Basic Components/footer.php');
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous" defer></script>
 <script src="JS/myOrders.js" type="text/JavaScript"></script>
-
-
 </body>
 
 

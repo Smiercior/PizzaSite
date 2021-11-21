@@ -1,15 +1,26 @@
 <?php
 //require_once 'C:\xampp\phpMyAdmin\vendor\autoload.php';
 
+// Add library for email sending
 use PHPMailer\PHPMailer\PHPMailer;
 include("PHPMailer-master\PHPMailer-master\src\SMTP.php");
 include("PHPMailer-master\PHPMailer-master\src\PHPMailer.php");
 include("PHPMailer-master\PHPMailer-master\src\Exception.php");
 include("PHPMailer-master\PHPMailer-master\src\OAuth.php");
-// Setting SMTP data
 
-function sentSMTPMail($to,$from,$fromName ,$subject,$body)
+
+function sendSMTPMail($to,$from,$fromName ,$subject,$body) // This function set SMTP data and send email
 {
+    /*
+        // Strings
+        $to - reciver email ( ex. reciver@gmail.com )
+        $from - sender email ( ex. sender@gmail.com )
+        $fromName - sender name ( ex. Sender )
+        $subject - email subject ( ex. Your order #2 )
+        $body - email content ( ex. Your order is ready, price is... )
+    */
+
+    // Setting SMTP data
     $ini = parse_ini_file("app.ini");
     $mail = new PHPMailer();
     $mail->isSMTP();
@@ -36,12 +47,14 @@ function sentSMTPMail($to,$from,$fromName ,$subject,$body)
     $mail->Subject = $subject;
     $mail->Body = $body;
     $mail->addAddress($to);
-    if(!$mail->send())
+
+    // Sent email
+    if(!$mail->send()) // If error occured
     {
         echo $mail->ErrorInfo;
         return false;
     }
-    else
+    else // If email was send
     {
         //echo "emial was send";
         return true;   

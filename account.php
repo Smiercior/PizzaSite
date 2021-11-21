@@ -1,6 +1,6 @@
 <?php
 include('server.php');
-$_SESSION['site'] = "login";
+$_SESSION['site'] = "account";
 if(!isset($_SESSION['username'])) header('location: login.php');
  ?>
  
@@ -18,15 +18,14 @@ if(!isset($_SESSION['username'])) header('location: login.php');
 <!-- JavaScript Bundle with Popper -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous" defer></script>
-
 </head>
 
 <body>
-
 <div class="container-fluid overflow-hidden px-0 bg-black log-container">
     <?php
     include('Basic Components/navbar.php');
     ?>
+
     <?php if(isset($_SESSION['success'])): ?>
         <div class="row w-100 justify-content-center mt-4 text-light">
             <div class="col-4 text-center border border-2 border-secondary">
@@ -54,6 +53,7 @@ if(!isset($_SESSION['username'])) header('location: login.php');
                 <div class="col-12 mb-2">
                     <input type="text" class="btn-outline-primary btn btnA bg-dark form-control w-75 text-light" name="username" value="<?= $_SESSION['email'] ?>" readonly>
                 </div>
+
                 <form method="POST">
                     <div class="col-12 mb-2">
                         <input type="text" class="btn-outline-primary btn btnA bg-dark form-control w-75 text-light" name="phone" minlength="9" maxlength="9" placeholder="Telefon" <?php if($_SESSION['phone'] != ""): ?> value="<?= $_SESSION['phone']; ?>" <?php endif ?>>
@@ -68,13 +68,11 @@ if(!isset($_SESSION['username'])) header('location: login.php');
                         <input type="text" class="btn-outline-primary btn btnA bg-dark form-control w-25 text-light" name="houseNumber" placeholder="Nr.dom" <?php if($_SESSION['houseNumber'] != ""): ?> value="<?= $_SESSION['houseNumber']; ?>" <?php endif ?>>
                     </div>
 
-
                     <div class="col-12">
                         <input type="submit" name="changeProfile" class="btn-outline-success btn btnA bg-dark form-control w-50" value="Zapisz dane">
                     </div>
                 </form>
             </div>
-      
         </div>
     </div>
 
@@ -106,8 +104,6 @@ if(!isset($_SESSION['username'])) header('location: login.php');
 <?php
 include('Basic Components/footer.php');
 ?>
-
-
 </body>
 
 

@@ -58,33 +58,38 @@ $_SESSION['site'] = "index";
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
                     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
+
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                    <img src="Img/pizza1.jpg" class="d-block w-100" alt="pizza1">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Najlepsza pizza w mieście!</h5>
-                        <p>Zamów już teraz</p>
+                        <img src="Img/pizza1.jpg" class="d-block w-100" alt="pizza1">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Najlepsza pizza w mieście!</h5>
+                            <p>Zamów już teraz</p>
+                        </div>
                     </div>
-                    </div>
+
                     <div class="carousel-item">
-                    <img src="Img/pizza2.jpg" class="d-block w-100" alt="pizza2">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Mamy wiele różnorodnych ofert!</h5>
-                        <p>Tylko u nas niezwykłe smaki</p>
+                        <img src="Img/pizza2.jpg" class="d-block w-100" alt="pizza2">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Mamy wiele różnorodnych ofert!</h5>
+                            <p>Tylko u nas niezwykłe smaki</p>
+                        </div>
                     </div>
-                    </div>
+
                     <div class="carousel-item">
-                    <img src="Img/pizza3.jpg" class="d-block w-100" alt="pizza3">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Nie czekaj!</h5>
-                        <p>Zobacz nasze oferty i złóż zamówienie</p>
-                    </div>
+                        <img src="Img/pizza3.jpg" class="d-block w-100" alt="pizza3">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Nie czekaj!</h5>
+                            <p>Zobacz nasze oferty i złóż zamówienie</p>
+                        </div>
                     </div>
                 </div>
+
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
+
                 <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
@@ -108,28 +113,34 @@ $_SESSION['site'] = "index";
                 <li class="list-group-item openHours text-center">
                     <p class="text-light"> Godziny otwarcia </p>
                 </li>
+
                 <li class="list-group-item  openHours">
                     <p class="text-light"> Pon <span class="text-success">8.00-20.00</span> </p>
                 </li>
+
                 <li class="list-group-item  openHours">
                     <p class="text-light"> Wt <span class="text-success">8.00-20.00</span> </p>
                 </li>
+
                 <li class="list-group-item  openHours">
                     <p class="text-light"> Śr <span class="text-success">8.00-20.00</span> </p>
                 </li>
+
                 <li class="list-group-item  openHours">
                     <p class="text-light"> Czw <span class="text-success">8.00-20.00</span> </p>
                 </li>
+
                 <li class="list-group-item  openHours">
                     <p class="text-light"> Pt <span class="text-success">12.00-20.00</span> </p>
                 </li>
+
                 <li class="list-group-item  openHours">
                     <p class="text-light"> Sob <span class="text-danger">zamknięte</span> </p>
                 </li>
+                
                 <li class="list-group-item  openHours">
                     <p class="text-light"> Ndz <span class="text-danger">zamknięte</span> </p>
                 </li>
-
             </ul>
         </div>
     </div>
